@@ -14,6 +14,9 @@ INFERENCE_SPEED_REPORT_PATH = REPORTS_DIR / "inference_speed.txt"
 _model = None
 _vectorizer = None
 
+def resources_loaded() -> bool:
+    return _model is not None and _vectorizer is not None
+
 def _load_pickle_with_version_check(file_path: Path, artifact_name: str):
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter("always")
@@ -113,7 +116,7 @@ if __name__ == "__main__":
     print("\n--- Function Name Predictor (Inference Demonstration) ---")
     
     # Example input used for lightweight benchmark
-    example_input = "Converts temperature from Celsius to Fahrenheit"
+    example_input = "Adds two integers int a int b return int keywords add sum"
     print(f"\nInput Metadata: \"{example_input}\"")
     
     try:

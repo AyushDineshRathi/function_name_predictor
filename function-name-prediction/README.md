@@ -1,43 +1,104 @@
 # Function Name Prediction
 
-A lightweight machine learning system designed to predict an appropriate function name from structured function metadata. This project prioritizes small model size, fast inference, and easy deployment, making it suitable for environments with limited computational resources (such as Android devices).
+Lightweight ML system that predicts a function name from metadata using:
+- TF-IDF vectorization
+- Logistic Regression classifier
+- FastAPI for inference
 
-## Project Structure Overview
+## Setup
 
-- `data/`
-  - `raw/`: Raw metadata for training.
-  - `processed/`: Processed data ready to be consumed by the training models.
-- `src/`: Modular source code for the ML pipeline.
-  - `data/`: Scripts for local data loading and splitting.
-  - `preprocessing/`: Code to clean text metadata and combine fields.
-  - `features/`: Vectorization and feature extraction logic (e.g., TF-IDF).
-  - `models/`: Implementations for lightweight classifiers (Logistic Regression / Naive Bayes).
-  - `evaluation/`: Scripts and metrics to evaluate model performance to ensure accuracy.
-  - `inference/`: Prediction logic for making inferences on new data.
-  - `api/`: Placeholder for future deployment modules.
-- `models/`: Directory holding compiled and saved models (`.pkl` or `.joblib` format).
-- `notebooks/`: Jupyter notebooks for exploratory data analysis, prototyping, and validation.
-
-## Environment Setup
-
-The dependencies for this project are minimal by design, relying primarily on `pandas`, `scikit-learn`, `numpy`, and `joblib`.
-
-1. Create a virtual environment (optional but recommended):
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-```
-
-2. Install the required Python packages:
-```bash
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Running the Pipeline
+## Run Full Pipeline
 
-Currently, the primary entry point is being structured inside `run_pipeline.py`, which will eventually orchestrate reading raw data, performing validations, applying preprocessing, fitting the TF-IDF vectorizer, training the targeted model, evaluating it, and serializing it into the `models/` directory.
-
-To run the pipeline outline (when complete):
 ```bash
 python run_pipeline.py
 ```
+
+This generates:
+- `models/function_model.pkl`
+- `models/vectorizer.pkl`
+- `reports/model_metrics.txt`
+- `reports/model_size.txt`
+
+## Run API
+
+```bash
+uvicorn src.api.app:app --reload
+```
+
+## API Usage
+
+### Predict Endpoint
+
+`POST /predict`
+
+Request:
+
+```json
+{
+  "metadata": "Adds two integers int a int b return int keywords add sum"
+}
+```
+
+Response:
+
+```json
+{
+  "predicted_function": "addNumbers"
+}
+```
+
+Request:
+
+```json
+{
+  "metadata": "Converts temperature from Celsius to Fahrenheit float celsius return float keywords convert temperature"
+}
+```
+
+Response:
+
+```json
+{
+  "predicted_function": "convertCelsiusToFahrenheit"
+}
+```
+
+### Health Endpoint
+
+`GET /health`
+
+Response:
+
+```json
+{
+  "status": "ok",
+  "model_loaded": true
+}
+```
+
+## CLI Prediction
+
+```bash
+python predict_cli.py "Adds two integers int a int b return int keywords add sum"
+```
+
+Output:
+
+```text
+Predicted Function: addNumbers
+```
+
+## Inference Speed Benchmark
+
+```bash
+python src/inference/predict.py
+```
+
+This writes latency in milliseconds to:
+- `reports/inference_speed.txt`

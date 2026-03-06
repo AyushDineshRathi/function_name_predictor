@@ -1,5 +1,5 @@
 Inference Speed Report
 ======================
-Input: Converts temperature from Celsius to Fahrenheit
-Prediction: convertCelsiusToFahrenheit
-Latency: 1.1715 ms
+Input: Adds two integers int a int b return int keywords add sum
+Prediction: addNumbers
+Latency: 0.8457 ms

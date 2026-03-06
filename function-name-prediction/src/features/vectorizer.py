@@ -1,6 +1,9 @@
-import os
 import joblib
+from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_VECTORIZER_PATH = PROJECT_ROOT / "models" / "vectorizer.pkl"
 
 # Global vectorizer instance
 _vectorizer = None
@@ -47,7 +50,7 @@ def transform_text(text_data):
         
     return vec.transform(text_data)
 
-def save_vectorizer(path="models/vectorizer.pkl"):
+def save_vectorizer(path=DEFAULT_VECTORIZER_PATH):
     """
     Saves the trained vectorizer to disk using joblib.
     
@@ -58,14 +61,14 @@ def save_vectorizer(path="models/vectorizer.pkl"):
     if not hasattr(vec, 'vocabulary_'):
         print("Warning: Saving an untrained vectorizer.")
         
-    # Ensure directory exists
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    
-    print(f"Saving vectorizer to {path}...")
-    joblib.dump(vec, path)
+    target_path = Path(path)
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+
+    print(f"Saving vectorizer to {target_path}...")
+    joblib.dump(vec, target_path)
     print("Vectorizer saved successfully.")
 
-def load_vectorizer(path="models/vectorizer.pkl"):
+def load_vectorizer(path=DEFAULT_VECTORIZER_PATH):
     """
     Loads a trained vectorizer from disk using joblib.
     
@@ -75,11 +78,12 @@ def load_vectorizer(path="models/vectorizer.pkl"):
     Returns:
         TfidfVectorizer: The loaded vectorizer instance.
     """
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Vectorizer file not found at {path}")
-        
-    print(f"Loading vectorizer from {path}...")
-    loaded_vec = joblib.load(path)
+    vectorizer_path = Path(path)
+    if not vectorizer_path.exists():
+        raise FileNotFoundError(f"Vectorizer file not found at {vectorizer_path}")
+
+    print(f"Loading vectorizer from {vectorizer_path}...")
+    loaded_vec = joblib.load(vectorizer_path)
     set_vectorizer(loaded_vec)
     print("Vectorizer loaded successfully.")
     return loaded_vec
@@ -94,10 +98,9 @@ if __name__ == "__main__":
     transformed = train_vectorizer(sample_texts)
     print(f"Transformed shape: {transformed.shape}")
     
-    model_path = os.path.join("models", "vectorizer.pkl")
-    save_vectorizer(model_path)
+    save_vectorizer(DEFAULT_VECTORIZER_PATH)
     
     # Test loading
-    load_vectorizer(model_path)
+    load_vectorizer(DEFAULT_VECTORIZER_PATH)
     test_transform = transform_text(["new test string return int params 0"])
     print(f"Test transform shape: {test_transform.shape}")

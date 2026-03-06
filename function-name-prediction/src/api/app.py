@@ -9,7 +9,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # Add the project root to sys.path so we can import src modules
 sys.path.append(str(PROJECT_ROOT))
 
-from src.inference.predict import predict_function, load_resources
+from src.inference.predict import predict_function, load_resources, resources_loaded
 
 # Define the request body schema
 class PredictRequest(BaseModel):
@@ -61,9 +61,9 @@ async def predict(request: PredictRequest):
 @app.get("/health")
 async def health_check():
     """
-    Simple health check endpoint to verify the API is running.
+    Health check endpoint with model/vectorizer readiness.
     """
-    return {"status": "ok", "message": "Function Name Predictor API is running."}
+    return {"status": "ok", "model_loaded": resources_loaded()}
 
 if __name__ == "__main__":
     import uvicorn

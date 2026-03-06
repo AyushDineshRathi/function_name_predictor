@@ -150,10 +150,10 @@ def main():
     print(f"Vectorizer size (vectorizer.pkl): {vectorizer_size_kb:.2f} KB")
 
     size_report = (
-        "Model Artifact Sizes\n"
-        "====================\n"
-        f"function_model.pkl: {model_size_kb:.2f} KB\n"
-        f"vectorizer.pkl: {vectorizer_size_kb:.2f} KB\n"
+        "Model Size Report\n"
+        "=================\n"
+        f"function_model.pkl : {model_size_kb:.2f} KB\n"
+        f"vectorizer.pkl : {vectorizer_size_kb:.2f} KB\n"
     )
     SIZE_REPORT_PATH.write_text(size_report, encoding="utf-8")
     print(f"Size report saved to {SIZE_REPORT_PATH}")
