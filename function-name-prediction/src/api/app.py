@@ -1,10 +1,12 @@
-import os
 import sys
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
 # Add the project root to sys.path so we can import src modules
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+sys.path.append(str(PROJECT_ROOT))
 
 from src.inference.predict import predict_function, load_resources
 
@@ -52,7 +54,7 @@ async def predict(request: PredictRequest):
         return PredictResponse(predicted_function=predicted_name)
         
     except FileNotFoundError as e:
-        raise HTTPException(status_code=500, detail=f"Model files missing. Ensure the model has been trained. {str(e)}")
+        raise HTTPException(status_code=500, detail="Models not found. Please run: python run_pipeline.py")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred during prediction: {str(e)}")
 

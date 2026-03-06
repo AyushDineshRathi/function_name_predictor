@@ -1,6 +1,23 @@
 import pandas as pd
 import random
-import os
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+def _count_params(params: str) -> int:
+    if not params or not params.strip():
+        return 0
+    return len([part for part in params.split(",") if part.strip()])
+
+def _build_description_variants(func: dict, base_description: str, params: str) -> list:
+    keyword_hint = ", ".join(func["keywords"][:2])
+    return [
+        base_description,
+        f"{base_description}. Uses parameters {params}.",
+        f"{base_description}. Returns {func['return_type']}.",
+        f"{base_description}. Library {func['library']} operation.",
+        f"{base_description}. Related keywords: {keyword_hint}.",
+    ]
 
 # Define the structure and metadata for dataset generation
 FUNCTION_TEMPLATES = {
@@ -457,10 +474,44 @@ FUNCTION_TEMPLATES = {
             "return_type": "boolean",
             "keywords": ["numeric", "number", "check", "validate", "digits"]
         }
+    ],
+    "TemperatureUtils": [
+        {
+            "function_name": "convertCelsiusToFahrenheit",
+            "descriptions": [
+                "Converts temperature from Celsius to Fahrenheit",
+                "Convert Celsius temperature to Fahrenheit",
+                "Transforms Celsius value into Fahrenheit",
+                "Temperature conversion from C to F",
+                "Converts degree Celsius reading to degree Fahrenheit",
+                "Outputs Fahrenheit value for a Celsius input",
+                "Maps Celsius measurement to Fahrenheit scale",
+                "Calculate Fahrenheit from Celsius value"
+            ],
+            "parameters": ["float celsius", "double celsiusValue", "float tempC"],
+            "return_type": "float",
+            "keywords": ["temperature", "celsius", "fahrenheit", "convert", "c_to_f", "tofahrenheit", "celsius_to_fahrenheit"]
+        },
+        {
+            "function_name": "convertFahrenheitToCelsius",
+            "descriptions": [
+                "Converts temperature from Fahrenheit to Celsius",
+                "Convert Fahrenheit temperature to Celsius",
+                "Transforms Fahrenheit value into Celsius",
+                "Temperature conversion from F to C",
+                "Converts degree Fahrenheit reading to degree Celsius",
+                "Outputs Celsius value for a Fahrenheit input",
+                "Maps Fahrenheit measurement to Celsius scale",
+                "Calculate Celsius from Fahrenheit value"
+            ],
+            "parameters": ["float fahrenheit", "double fahrenheitValue", "float tempF"],
+            "return_type": "float",
+            "keywords": ["temperature", "fahrenheit", "celsius", "convert", "f_to_c", "tocelsius", "fahrenheit_to_celsius"]
+        }
     ]
 }
 
-def generate_dataset(num_records=400):
+def generate_dataset(num_records=720):
     data = []
     
     # We want roughly an equal spread across all 34 functions.
@@ -487,15 +538,12 @@ def generate_dataset(num_records=400):
         ret_type = func['return_type']
         
         for _ in range(records_count[idx]):
-            desc = random.choice(func['descriptions'])
             params = random.choice(func['parameters'])
+            desc = random.choice(_build_description_variants(func, random.choice(func['descriptions']), params))
             kw = ", ".join(random.sample(func['keywords'], k=min(3, len(func['keywords']))))
             
             # calculate param count
-            if params.strip() == "":
-                p_count = 0
-            else:
-                p_count = len(params.split(","))
+            p_count = _count_params(params)
                 
             row = {
                 "description": desc,
@@ -516,15 +564,15 @@ def generate_dataset(num_records=400):
 
 def main():
     print("Generating function names dataset...")
-    df = generate_dataset(num_records=380) # Using 380 to be within 350-400 bounds
+    df = generate_dataset(num_records=720)
     print(f"Generated {len(df)} records.")
     
     # Save the dataframe
-    output_dir = os.path.join("data", "raw")
-    output_path = os.path.join(output_dir, "functions_dataset.csv")
+    output_dir = PROJECT_ROOT / "data" / "raw"
+    output_path = output_dir / "functions_dataset.csv"
     
     # Ensure directory exists
-    os.makedirs(output_dir, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     
     df.to_csv(output_path, index=False)
     print(f"Dataset successfully saved to: {output_path}")

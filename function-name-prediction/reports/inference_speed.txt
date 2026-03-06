@@ -1,0 +1,5 @@
+Inference Speed Report
+======================
+Input: Converts temperature from Celsius to Fahrenheit
+Prediction: convertCelsiusToFahrenheit
+Latency: 1.1715 ms

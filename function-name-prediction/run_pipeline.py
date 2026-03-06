@@ -6,11 +6,13 @@ This script binds together data ingestion, preprocessing, training, and output.
 """
 
 import logging
-import os
 import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent
 
 # Ensure project modules can be loaded
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+sys.path.append(str(PROJECT_ROOT))
 
 from src.data.dataset_generator import generate_dataset
 from src.preprocessing.metadata_processor import prepare_dataset, save_processed_data
@@ -22,23 +24,23 @@ def main():
     logging.info("Starting Function Name Prediction pipeline...")
 
     # Define paths
-    raw_data_dir = os.path.join("data", "raw")
-    raw_data_path = os.path.join(raw_data_dir, "functions_dataset.csv")
+    raw_data_dir = PROJECT_ROOT / "data" / "raw"
+    raw_data_path = raw_data_dir / "functions_dataset.csv"
     
-    processed_data_dir = os.path.join("data", "processed")
-    processed_data_path = os.path.join(processed_data_dir, "processed_dataset.csv")
+    processed_data_dir = PROJECT_ROOT / "data" / "processed"
+    processed_data_path = processed_data_dir / "processed_dataset.csv"
 
     try:
         # Step 1: Generate dataset
         logging.info("Step 1: Generating synthetic dataset...")
-        os.makedirs(raw_data_dir, exist_ok=True)
-        df_raw = generate_dataset(num_records=380)
+        raw_data_dir.mkdir(parents=True, exist_ok=True)
+        df_raw = generate_dataset(num_records=720)
         df_raw.to_csv(raw_data_path, index=False)
         logging.info(f"Dataset generated and saved to {raw_data_path}")
 
         # Step 2: Preprocessing
         logging.info("Step 2: Preprocessing metadata...")
-        os.makedirs(processed_data_dir, exist_ok=True)
+        processed_data_dir.mkdir(parents=True, exist_ok=True)
         df_processed = prepare_dataset(raw_data_path)
         save_processed_data(df_processed, processed_data_path)
         logging.info(f"Preprocessed dataset saved to {processed_data_path}")

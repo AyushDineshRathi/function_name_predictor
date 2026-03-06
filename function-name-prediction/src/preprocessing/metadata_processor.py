@@ -1,6 +1,8 @@
 import pandas as pd
 import re
-import os
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 def clean_text(text):
     """
@@ -31,8 +33,9 @@ def prepare_dataset(path: str) -> pd.DataFrame:
     
     Outputs a DataFrame with columns: ['combined_metadata', 'function_name']
     """
-    print(f"Loading raw dataset from {path}...")
-    df = pd.read_csv(path)
+    input_path = Path(path)
+    print(f"Loading raw dataset from {input_path}...")
+    df = pd.read_csv(input_path)
     
     print("Cleaning text fields...")
     # Clean relevant text columns
@@ -61,7 +64,9 @@ def prepare_dataset(path: str) -> pd.DataFrame:
             parts.append(f"library {row['library']}")
             
         if pd.notna(row.get('keywords')) and row['keywords']:
+            # Repeat keyword list once to increase signal for class-discriminative tokens.
             parts.append(f"keywords {row['keywords']}")
+            parts.append(f"keyword_hint {row['keywords']}")
             
         if pd.notna(row.get('param_count')):
             parts.append(f"params {row['param_count']}")
@@ -81,18 +86,19 @@ def save_processed_data(df: pd.DataFrame, output_path: str):
     Saves the processed dataset to the specified path.
     """
     # Ensure directory exists
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     
-    print(f"Saving processed dataset to {output_path}...")
-    df.to_csv(output_path, index=False)
+    print(f"Saving processed dataset to {output_file}...")
+    df.to_csv(output_file, index=False)
     print("Save complete.")
 
 if __name__ == "__main__":
     # For testing the module directly
-    raw_path = os.path.join("data", "raw", "functions_dataset.csv")
-    processed_path = os.path.join("data", "processed", "processed_dataset.csv")
+    raw_path = PROJECT_ROOT / "data" / "raw" / "functions_dataset.csv"
+    processed_path = PROJECT_ROOT / "data" / "processed" / "processed_dataset.csv"
     
-    if os.path.exists(raw_path):
+    if raw_path.exists():
         processed_df = prepare_dataset(raw_path)
         
         # Display an example of the combined text

@@ -1,0 +1,4 @@
+Model Artifact Sizes
+====================
+function_model.pkl: 228.26 KB
+vectorizer.pkl: 17.12 KB
