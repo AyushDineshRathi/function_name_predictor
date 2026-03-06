@@ -1,0 +1,381 @@
+description,parameters,return_type,library,keywords,param_count,function_name
+Calculates the total sum of items in a list,List<float> numbers,int,DataUtils,"list, math, sum",1,calculateSum
+Returns the largest number in an array,List<float> items,int,MathUtils,"largest, math, highest",1,findMaximum
+Gets data from an external web API,String url,JsonObject,NetworkService,"rest, api, json",1,fetchApiData
+Creates a copy of the file at the new path,"String source, String destination",boolean,FileUtils,"file, transfer, copy",2,copyFile
+Retrieves the min value from the given list,int[] array,int,MathUtils,"math, lowest, smallest",1,findMinimum
+Returns the total when adding two numbers together,"integer x, integer y",int,MathUtils,"add, math, arithmetic",2,addNumbers
+Separates text into an array based on a separator,"String text, String delimiter",List<String>,StringUtils,"string, delimiter, split",2,splitString
+Checks if the password meets security constraints,String rawPassword,boolean,ValidationUtils,"check, password, security",1,validatePassword
+Returns a sorted copy of the collection,List<Object> items,List<Object>,DataUtils,"order, list, sort",1,sortList
+Calculates the total sum of items in a list,List<float> numbers,int,DataUtils,"sum, math, calculate",1,calculateSum
+Moves a file to a new location,"String oldPath, String newPath",boolean,FileUtils,"file, move, rename",2,moveFile
+Returns the aggregate sum,List<int> items,int,DataUtils,"list, math, sum",1,calculateSum
+Retrieves structured data from the server,String endpoint,JsonObject,NetworkService,"rest, fetch, json",1,fetchApiData
+Merges a list of strings into a single text,"List<String> list, String joiner",String,StringUtils,"merge, join, concat",2,joinStrings
+Downloads media from a server,"String url, String destination",boolean,NetworkService,"fetch, network, download",2,downloadFile
+Loads text representation of a file,String path,String,FileUtils,"io, read, content",1,readFile
+Posts a document to an API endpoint,"String localPath, String serverUrl",boolean,NetworkService,"upload, transfer, file",2,uploadFile
+Computes the subtraction of b from a,"int num1, int num2",int,MathUtils,"minus, math, difference",2,subtractNumbers
+Renames or moves a file path,"String oldPath, String newPath",boolean,FileUtils,"move, relocate, rename",2,moveFile
+Finds the mean value from an array,List<float> numbers,float,MathUtils,"mean, math, statistics",1,calculateAverage
+Returns the length of the provided text,String text,int,StringUtils,"characters, string, length",1,countCharacters
+Confirms telephone numbers digit constraints,String phoneNumber,boolean,ValidationUtils,"check, phone, number",1,validatePhone
+Returns the length of the provided text,String input,int,StringUtils,"string, length, characters",1,countCharacters
+Trims whitespace from both ends of text,String input,String,StringUtils,"whitespace, clean, format",1,trimWhitespace
+Finds the maximum value in a collection,List<float> items,int,MathUtils,"maximum, largest, max",1,findMaximum
+Validates password strength according to rules,String password,boolean,ValidationUtils,"check, password, security",1,validatePassword
+Divides a string into multiple parts,"String str, String regex",List<String>,StringUtils,"split, separate, string",2,splitString
+Splits a string by a given delimiter,"String text, String delimiter",List<String>,StringUtils,"delimiter, split, separate",2,splitString
+Checks if a file exists at the given path,String path,boolean,FileUtils,"check, verify, file",1,fileExists
+Returns string without leading or trailing spaces,String rawString,String,StringUtils,"whitespace, clean, format",1,trimWhitespace
+Calculates the sum of two integers,"integer x, integer y",int,MathUtils,"add, sum, arithmetic",2,addNumbers
+Calculates x times y,"float x, float y",int,MathUtils,"math, product, times",2,multiplyNumbers
+Computes the addition of a and b,"int num1, int num2",int,MathUtils,"add, sum, arithmetic",2,addNumbers
+Confirms the web address formatting,String webAddress,boolean,ValidationUtils,"link, validate, format",1,validateURL
+Calculates the average of a list of numbers,float[] values,float,MathUtils,"statistics, math, mean",1,calculateAverage
+Totals the list values incrementally,List<float> numbers,int,DataUtils,"math, list, total",1,calculateSum
+Makes the first character of the text uppercase,String str,String,StringUtils,"uppercase, capitalize, format",1,capitalizeString
+Identifies the highest number,List<int> numbers,int,MathUtils,"math, max, highest",1,findMaximum
+Joins two collections sequentially,"List<T> a, List<T> b",List<Object>,DataUtils,"combine, join, list",2,mergeLists
+Writes text data to a file on disk,"String filePath, String content",void,FileUtils,"io, save, write",2,writeFile
+Writes text data to a file on disk,"String filePath, String content",void,FileUtils,"io, file, write",2,writeFile
+Transfers file permanently to another directory,"String source, String destination",boolean,FileUtils,"rename, file, relocate",2,moveFile
+Stores string data in the filesystem,"String filePath, String content",void,FileUtils,"save, write, output",2,writeFile
+Transmits local file to cloud storage,"String filePath, String url",boolean,NetworkService,"file, transfer, network",2,uploadFile
+Saves a remote file locally,"String url, String destination",boolean,NetworkService,"file, network, fetch",2,downloadFile
+Finds the mean value from an array,float[] values,float,MathUtils,"mean, math, average",1,calculateAverage
+Erases the file completely,File file,boolean,FileUtils,"erase, file, delete",1,deleteFile
+Retrieves the max value from the given list,List<float> items,int,MathUtils,"largest, maximum, math",1,findMaximum
+Executes a network GET call,URI uri,HttpResponse,NetworkService,"get, http, network",1,sendGetRequest
+Submits form or JSON data to a server,"String url, Object body",HttpResponse,NetworkService,"http, post, network",2,sendPostRequest
+Strips whitespace characters,String input,String,StringUtils,"format, trim, clean",1,trimWhitespace
+Determines the average of the elements,List<float> numbers,float,MathUtils,"mean, average, math",1,calculateAverage
+Determines the average of the elements,List<int> items,float,MathUtils,"average, statistics, math",1,calculateAverage
+Returns the result of subtracting two integers,"int a, int b",int,MathUtils,"math, difference, minus",2,subtractNumbers
+Calculates the average of a list of numbers,float[] values,float,MathUtils,"statistics, mean, math",1,calculateAverage
+Combines multiple arrays together,"int[] first, int[] second",List<Object>,DataUtils,"list, combine, merge",2,mergeLists
+Retrieves an HTTP response securely,String url,HttpResponse,NetworkService,"http, request, get",1,sendGetRequest
+Calculates the sum of two integers,"int a, int b",int,MathUtils,"sum, add, addition",2,addNumbers
+Returns the length of the provided text,String input,int,StringUtils,"count, string, characters",1,countCharacters
+Combines multiple arrays together,"int[] first, int[] second",List<Object>,DataUtils,"merge, join, combine",2,mergeLists
+Confirms telephone numbers digit constraints,String mobile,boolean,ValidationUtils,"number, check, validate",1,validatePhone
+Validates if the provided phone string is allowable,String mobile,boolean,ValidationUtils,"check, number, validate",1,validatePhone
+Gets the total character count,String text,int,StringUtils,"string, characters, length",1,countCharacters
+Verifies whether an email contains valid characters and domain,String emailAddress,boolean,ValidationUtils,"check, validate, email",1,validateEmail
+Sorts a list of objects based on natural ordering,List<T> collection,List<Object>,DataUtils,"order, list, sort",1,sortList
+Returns true if the string is parseable to number,String val,boolean,ValidationUtils,"validate, numeric, check",1,isNumeric
+Returns the total when adding two numbers together,"int num1, int num2",int,MathUtils,"math, addition, sum",2,addNumbers
+Inverts a text sequence,String text,String,StringUtils,"invert, text, string",1,reverseString
+Fetches file bytes from a URL to local storage,"String url, String destination",boolean,NetworkService,"download, fetch, file",2,downloadFile
+Creates a reversed copy of the string,char[] chars,String,StringUtils,"text, reverse, string",1,reverseString
+Gets the smallest integer,List<float> items,int,MathUtils,"smallest, lowest, math",1,findMinimum
+Multiplies two numbers together,"float x, float y",int,MathUtils,"multiply, math, times",2,multiplyNumbers
+Outputs the given string to a file path,"String path, String data",void,FileUtils,"write, file, save",2,writeFile
+Submits form or JSON data to a server,"String url, Object body",HttpResponse,NetworkService,"http, post, network",2,sendPostRequest
+Determines if an address is properly formed,String email,boolean,ValidationUtils,"check, email, validate",1,validateEmail
+Posts a document to an API endpoint,"String localPath, String serverUrl",boolean,NetworkService,"upload, file, transfer",2,uploadFile
+Returns the smallest number in an array,int[] array,int,MathUtils,"min, minimum, math",1,findMinimum
+Verifies whether an email contains valid characters and domain,String targetEmail,boolean,ValidationUtils,"format, validate, email",1,validateEmail
+Verifies numeric text representation,String input,boolean,ValidationUtils,"check, validate, numeric",1,isNumeric
+Gets the file contents as a string,String filePath,String,FileUtils,"file, io, read",1,readFile
+Divides a string into multiple parts,"String str, String regex",List<String>,StringUtils,"delimiter, string, separate",2,splitString
+Performs addition on two numeric inputs,"int first, int second",int,MathUtils,"add, arithmetic, sum",2,addNumbers
+Keeps items matching criteria in the array,"List<Object> items, Predicate condition",List<Object>,DataUtils,"filter, list, remove",2,filterList
+Merges two distinct lists into one,"int[] first, int[] second",List<Object>,DataUtils,"merge, combine, list",2,mergeLists
+Finds the difference between num1 and num2,"int num1, int num2",int,MathUtils,"difference, subtract, math",2,subtractNumbers
+Validates whether a generic file path is accessible,String path,boolean,FileUtils,"check, verify, exists",1,fileExists
+Replicates file data to another location,"String srcPath, String destPath",boolean,FileUtils,"copy, transfer, duplicate",2,copyFile
+Performs an HTTP POST,"String uri, Map data",HttpResponse,NetworkService,"post, http, payload",2,sendPostRequest
+Calculates the total sum of items in a list,List<float> numbers,int,DataUtils,"sum, total, math",1,calculateSum
+Joins an array of strings into one,"String[] items, String delimiter",String,StringUtils,"merge, join, string",2,joinStrings
+Downloads media from a server,"String remoteUrl, String localPath",boolean,NetworkService,"network, fetch, file",2,downloadFile
+Verifies mobile number format,String mobile,boolean,ValidationUtils,"phone, validate, check",1,validatePhone
+Merges two distinct lists into one,"List<Object> list1, List<Object> list2",List<Object>,DataUtils,"join, list, combine",2,mergeLists
+Extracs matching elements,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"remove, list, filter",2,filterList
+Returns the length of the provided text,String text,int,StringUtils,"length, count, characters",1,countCharacters
+Inverts a text sequence,String text,String,StringUtils,"text, reverse, string",1,reverseString
+Sorts a list of objects based on natural ordering,int[] array,List<Object>,DataUtils,"sort, arrange, order",1,sortList
+Parses file into a string format,File file,String,FileUtils,"read, file, io",1,readFile
+Duplicates an existing file,"String srcPath, String destPath",boolean,FileUtils,"copy, duplicate, file",2,copyFile
+Ensures the URL matches URI conventions,String url,boolean,ValidationUtils,"link, web, format",1,validateURL
+Gets the total character count,String text,int,StringUtils,"characters, length, string",1,countCharacters
+Sorts given items in ascending order,List<Object> items,List<Object>,DataUtils,"arrange, sort, order",1,sortList
+Strips whitespace characters,String text,String,StringUtils,"whitespace, trim, clean",1,trimWhitespace
+Retrieves the max value from the given list,List<int> numbers,int,MathUtils,"math, largest, highest",1,findMaximum
+Returns the smallest number in an array,List<int> numbers,int,MathUtils,"smallest, min, minimum",1,findMinimum
+Combines multiple strings with a separator,"List<String> list, String joiner",String,StringUtils,"string, join, concat",2,joinStrings
+Performs an HTTP POST,"String url, Object body",HttpResponse,NetworkService,"payload, http, post",2,sendPostRequest
+Reconstructs a string from parts,"List<String> list, String joiner",String,StringUtils,"concat, join, merge",2,joinStrings
+Inverts a text sequence,String text,String,StringUtils,"reverse, invert, text",1,reverseString
+Determines if an address is properly formed,String email,boolean,ValidationUtils,"validate, email, format",1,validateEmail
+Subtracts the second number from the first,"int minuend, int subtrahend",int,MathUtils,"minus, subtract, math",2,subtractNumbers
+Totals the list values incrementally,double[] array,int,DataUtils,"sum, list, math",1,calculateSum
+Returns the length of the provided text,String input,int,StringUtils,"string, characters, count",1,countCharacters
+Calls a REST endpoint to retrieve data,String apiUrl,JsonObject,NetworkService,"api, data, fetch",1,fetchApiData
+Validates password strength according to rules,String rawPassword,boolean,ValidationUtils,"check, security, validate",1,validatePassword
+Calculates x times y,"float x, float y",int,MathUtils,"times, product, multiply",2,multiplyNumbers
+Checks if a string is composed entirely of numbers,String val,boolean,ValidationUtils,"validate, number, digits",1,isNumeric
+Performs a division operation,"double numerator, double denominator",float,MathUtils,"quotient, math, divide",2,divideNumbers
+Sorts given items in ascending order,List<Object> items,List<Object>,DataUtils,"arrange, sort, list",1,sortList
+Checks if an email string is structurally sound,String targetEmail,boolean,ValidationUtils,"email, check, validate",1,validateEmail
+Retrieves structured data from the server,String url,JsonObject,NetworkService,"rest, api, json",1,fetchApiData
+Breaks down a string into a list,"String text, String delimiter",List<String>,StringUtils,"string, delimiter, split",2,splitString
+Validates if the provided phone string is allowable,String mobile,boolean,ValidationUtils,"validate, number, phone",1,validatePhone
+Performs addition on two numeric inputs,"integer x, integer y",int,MathUtils,"math, sum, addition",2,addNumbers
+Sorts given items in ascending order,int[] array,List<Object>,DataUtils,"order, list, sort",1,sortList
+Erases the file completely,String targetPath,boolean,FileUtils,"erase, remove, file",1,deleteFile
+Ensures password has appropriate complexity,String password,boolean,ValidationUtils,"password, check, validate",1,validatePassword
+Retrieves structured data from the server,String url,JsonObject,NetworkService,"api, rest, json",1,fetchApiData
+Parses file into a string format,String path,String,FileUtils,"content, file, read",1,readFile
+Renames or moves a file path,"String source, String destination",boolean,FileUtils,"move, file, rename",2,moveFile
+Stores string data in the filesystem,"File file, String text",void,FileUtils,"output, write, io",2,writeFile
+Performs an HTTP POST,"String url, Object body",HttpResponse,NetworkService,"http, request, network",2,sendPostRequest
+Keeps items matching criteria in the array,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"list, remove, select",2,filterList
+Finds the difference between num1 and num2,"int minuend, int subtrahend",int,MathUtils,"minus, difference, subtract",2,subtractNumbers
+Verifies mobile number format,String phoneNumber,boolean,ValidationUtils,"phone, number, check",1,validatePhone
+Creates a copy of the file at the new path,"String source, String destination",boolean,FileUtils,"transfer, file, duplicate",2,copyFile
+Divides the first number by the second,"double numerator, double denominator",float,MathUtils,"math, divide, quotient",2,divideNumbers
+Identifies the highest number,List<int> numbers,int,MathUtils,"maximum, largest, math",1,findMaximum
+Sends a GET request to the specified endpoint,String endpoint,HttpResponse,NetworkService,"get, http, request",1,sendGetRequest
+Retrieves structured data from the server,String url,JsonObject,NetworkService,"api, json, rest",1,fetchApiData
+Computes the multiplication of two integers,"float x, float y",int,MathUtils,"math, times, multiply",2,multiplyNumbers
+Parses file into a string format,String path,String,FileUtils,"read, io, content",1,readFile
+Returns unique elements only from an array,List<T> elements,List<Object>,DataUtils,"duplicates, clean, list",1,removeDuplicates
+Concatenates elements of a list using a delimiter,"String[] items, String delimiter",String,StringUtils,"join, concat, merge",2,joinStrings
+Computes the multiplication of two integers,"int a, int b",int,MathUtils,"math, times, multiply",2,multiplyNumbers
+Tokensizes the string using delimiter,"String text, String delimiter",List<String>,StringUtils,"string, separate, split",2,splitString
+Returns the length of the provided text,String text,int,StringUtils,"string, count, characters",1,countCharacters
+Ensures the string starts with a capital letter,String str,String,StringUtils,"uppercase, capitalize, string",1,capitalizeString
+Verifies that string is a strong password,String rawPassword,boolean,ValidationUtils,"security, validate, password",1,validatePassword
+Clears a file from the disk,File file,boolean,FileUtils,"file, erase, delete",1,deleteFile
+Validates the format of an email address,String targetEmail,boolean,ValidationUtils,"format, check, email",1,validateEmail
+Erases the file completely,String targetPath,boolean,FileUtils,"erase, remove, file",1,deleteFile
+Verifies that string is a strong password,String rawPassword,boolean,ValidationUtils,"validate, check, security",1,validatePassword
+Submits form or JSON data to a server,"String url, Object body",HttpResponse,NetworkService,"network, request, payload",2,sendPostRequest
+Returns a sorted copy of the collection,List<T> collection,List<Object>,DataUtils,"arrange, list, sort",1,sortList
+Reads all content from a file,File file,String,FileUtils,"read, io, file",1,readFile
+Returns the product of the given values,"int num1, int num2",int,MathUtils,"multiply, times, product",2,multiplyNumbers
+Downloads media from a server,"String remoteUrl, String localPath",boolean,NetworkService,"download, file, network",2,downloadFile
+Removes duplicate values from a list,List<Object> items,List<Object>,DataUtils,"list, clean, unique",1,removeDuplicates
+Keeps items matching criteria in the array,"List<Object> items, Predicate condition",List<Object>,DataUtils,"select, list, remove",2,filterList
+Concatenates array sets into a single list,"List<T> a, List<T> b",List<Object>,DataUtils,"merge, join, combine",2,mergeLists
+Gets data from an external web API,String apiUrl,JsonObject,NetworkService,"rest, fetch, json",1,fetchApiData
+Checks if an email string is structurally sound,String emailAddress,boolean,ValidationUtils,"format, email, check",1,validateEmail
+Flips the characters in the string,char[] chars,String,StringUtils,"reverse, invert, text",1,reverseString
+Retrieves the min value from the given list,List<int> numbers,int,MathUtils,"min, math, lowest",1,findMinimum
+Validates password strength according to rules,String password,boolean,ValidationUtils,"check, validate, password",1,validatePassword
+Sends a GET request to the specified endpoint,String endpoint,HttpResponse,NetworkService,"request, get, network",1,sendGetRequest
+Purges repetitive items in the collection,List<T> elements,List<Object>,DataUtils,"unique, clean, list",1,removeDuplicates
+Returns unique elements only from an array,List<Object> items,List<Object>,DataUtils,"unique, list, clean",1,removeDuplicates
+Removes leading and trailing spaces from a string,String input,String,StringUtils,"clean, format, trim",1,trimWhitespace
+Verifies that string is a strong password,String rawPassword,boolean,ValidationUtils,"security, validate, check",1,validatePassword
+Returns the length of the provided text,String text,int,StringUtils,"string, count, characters",1,countCharacters
+Confirms telephone numbers digit constraints,String phoneNumber,boolean,ValidationUtils,"phone, number, check",1,validatePhone
+Calculates the quotient of two values,"float num1, float num2",float,MathUtils,"divide, fraction, math",2,divideNumbers
+Duplicates an existing file,"File sourceFile, File targetFile",boolean,FileUtils,"duplicate, file, copy",2,copyFile
+Extracs matching elements,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"remove, list, select",2,filterList
+Validates whether the text input is a numeric type,String val,boolean,ValidationUtils,"check, number, digits",1,isNumeric
+Orders the elements in an array sequentially,List<T> collection,List<Object>,DataUtils,"list, sort, order",1,sortList
+Sends a GET request to the specified endpoint,String endpoint,HttpResponse,NetworkService,"network, request, get",1,sendGetRequest
+Returns a divided by b,"double numerator, double denominator",float,MathUtils,"math, divide, quotient",2,divideNumbers
+Determines if an address is properly formed,String emailAddress,boolean,ValidationUtils,"check, email, validate",1,validateEmail
+Returns true if the file is present on disk,String filePath,boolean,FileUtils,"verify, check, exists",1,fileExists
+Subtracts the second number from the first,"int minuend, int subtrahend",int,MathUtils,"minus, difference, math",2,subtractNumbers
+Calculates the difference between two values,"int a, int b",int,MathUtils,"subtract, difference, minus",2,subtractNumbers
+Validates whether the text input is a numeric type,String str,boolean,ValidationUtils,"check, number, numeric",1,isNumeric
+Ensures the URL matches URI conventions,String url,boolean,ValidationUtils,"web, link, url",1,validateURL
+Retrieves the min value from the given list,List<int> numbers,int,MathUtils,"lowest, math, min",1,findMinimum
+Gets the file contents as a string,File file,String,FileUtils,"read, io, file",1,readFile
+Strips out duplicated entries,List<Object> items,List<Object>,DataUtils,"clean, list, duplicates",1,removeDuplicates
+Computes the multiplication of two integers,"int num1, int num2",int,MathUtils,"multiply, product, math",2,multiplyNumbers
+Ensures the URL matches URI conventions,String url,boolean,ValidationUtils,"web, link, url",1,validateURL
+Finds the maximum value in a collection,List<float> items,int,MathUtils,"largest, max, highest",1,findMaximum
+Verifies the file's existence,String path,boolean,FileUtils,"exists, verify, check",1,fileExists
+Returns the smallest number in an array,List<int> numbers,int,MathUtils,"lowest, minimum, min",1,findMinimum
+Determines if a file exists,String location,boolean,FileUtils,"verify, file, check",1,fileExists
+Checks if a given string is a valid URL,String link,boolean,ValidationUtils,"validate, format, web",1,validateURL
+Multiplies two numbers together,"int a, int b",int,MathUtils,"product, times, multiply",2,multiplyNumbers
+Sorts given items in ascending order,List<Object> items,List<Object>,DataUtils,"order, arrange, sort",1,sortList
+Transforms string to capitalized case,String text,String,StringUtils,"uppercase, string, format",1,capitalizeString
+Removes elements that do not match the predicate,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"remove, select, list",2,filterList
+Purges repetitive items in the collection,List<T> elements,List<Object>,DataUtils,"unique, duplicates, clean",1,removeDuplicates
+Joins two collections sequentially,"List<Object> list1, List<Object> list2",List<Object>,DataUtils,"list, combine, join",2,mergeLists
+Shifts file to a destination path,"String oldPath, String newPath",boolean,FileUtils,"file, move, relocate",2,moveFile
+Computes the multiplication of two integers,"int num1, int num2",int,MathUtils,"math, product, times",2,multiplyNumbers
+Makes the first character of the text uppercase,String text,String,StringUtils,"string, capitalize, format",1,capitalizeString
+Stores string data in the filesystem,"String path, String data",void,FileUtils,"io, write, file",2,writeFile
+Duplicates an existing file,"String source, String destination",boolean,FileUtils,"transfer, duplicate, file",2,copyFile
+Extracs matching elements,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"filter, list, select",2,filterList
+Retrieves data from the specified path,String path,String,FileUtils,"read, file, io",1,readFile
+Calls a REST endpoint to retrieve data,String apiUrl,JsonObject,NetworkService,"api, json, data",1,fetchApiData
+Converts the string to title case,String text,String,StringUtils,"uppercase, capitalize, string",1,capitalizeString
+Checks if a string is composed entirely of numbers,String text,boolean,ValidationUtils,"validate, number, check",1,isNumeric
+Validates credentials threshold,String password,boolean,ValidationUtils,"security, validate, check",1,validatePassword
+Finds the mean value from an array,List<float> numbers,float,MathUtils,"math, mean, statistics",1,calculateAverage
+Merges a list of strings into a single text,"List<String> parts, String separator",String,StringUtils,"join, string, concat",2,joinStrings
+Retrieves an HTTP response securely,URI uri,HttpResponse,NetworkService,"http, get, request",1,sendGetRequest
+Returns the aggregate sum,List<float> numbers,int,DataUtils,"calculate, total, sum",1,calculateSum
+Erases the file completely,String filePath,boolean,FileUtils,"file, remove, erase",1,deleteFile
+Computes the average score,float[] values,float,MathUtils,"statistics, math, mean",1,calculateAverage
+Verifies numeric text representation,String text,boolean,ValidationUtils,"numeric, validate, number",1,isNumeric
+Makes the first character of the text uppercase,String text,String,StringUtils,"capitalize, format, string",1,capitalizeString
+Deduplicates a list,List<T> elements,List<Object>,DataUtils,"list, unique, duplicates",1,removeDuplicates
+Trims whitespace from both ends of text,String text,String,StringUtils,"format, whitespace, trim",1,trimWhitespace
+Verifies the file's existence,String filePath,boolean,FileUtils,"verify, check, exists",1,fileExists
+Performs a division operation,"float num1, float num2",float,MathUtils,"fraction, math, divide",2,divideNumbers
+Returns true if the file is present on disk,String filePath,boolean,FileUtils,"file, check, verify",1,fileExists
+Divides the first number by the second,"double numerator, double denominator",float,MathUtils,"fraction, quotient, math",2,divideNumbers
+Adds all elements in the array,List<int> items,int,DataUtils,"list, sum, math",1,calculateSum
+Determines the average of the elements,List<int> items,float,MathUtils,"average, math, mean",1,calculateAverage
+Returns the aggregate sum,List<int> items,int,DataUtils,"total, calculate, sum",1,calculateSum
+Transfers file permanently to another directory,"String source, String destination",boolean,FileUtils,"relocate, file, move",2,moveFile
+Strips whitespace characters,String input,String,StringUtils,"whitespace, clean, format",1,trimWhitespace
+Identifies the lowest number,int[] array,int,MathUtils,"minimum, smallest, lowest",1,findMinimum
+Renames or moves a file path,"String source, String destination",boolean,FileUtils,"file, relocate, move",2,moveFile
+Validates whether the text input is a numeric type,String input,boolean,ValidationUtils,"validate, numeric, number",1,isNumeric
+Outputs the given string to a file path,"String filePath, String content",void,FileUtils,"output, write, save",2,writeFile
+Keeps items matching criteria in the array,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"list, select, filter",2,filterList
+Extracs matching elements,"List<Object> items, Predicate condition",List<Object>,DataUtils,"select, filter, list",2,filterList
+Multiplies two numbers together,"float x, float y",int,MathUtils,"math, product, multiply",2,multiplyNumbers
+Moves a file to a new location,"String source, String destination",boolean,FileUtils,"rename, file, move",2,moveFile
+Checks if the phone number is valid,String phoneNumber,boolean,ValidationUtils,"validate, check, phone",1,validatePhone
+Returns the product of the given values,"int a, int b",int,MathUtils,"math, product, times",2,multiplyNumbers
+Stores string data in the filesystem,"String filePath, String content",void,FileUtils,"save, io, write",2,writeFile
+Appends one list to another,"int[] first, int[] second",List<Object>,DataUtils,"join, combine, merge",2,mergeLists
+Posts data to an API endpoint,"String endpoint, String jsonPayload",HttpResponse,NetworkService,"request, payload, http",2,sendPostRequest
+Retrieves the min value from the given list,List<float> items,int,MathUtils,"min, lowest, minimum",1,findMinimum
+Breaks down a string into a list,"String text, String delimiter",List<String>,StringUtils,"separate, split, string",2,splitString
+Adds all elements in the array,double[] array,int,DataUtils,"total, list, calculate",1,calculateSum
+Returns the total when adding two numbers together,"int first, int second",int,MathUtils,"arithmetic, add, sum",2,addNumbers
+Reverses a given string,char[] chars,String,StringUtils,"invert, text, reverse",1,reverseString
+Verifies the file's existence,String filePath,boolean,FileUtils,"file, verify, check",1,fileExists
+Subtracts the second number from the first,"int minuend, int subtrahend",int,MathUtils,"math, minus, difference",2,subtractNumbers
+Arranges the list elements,List<T> collection,List<Object>,DataUtils,"order, arrange, list",1,sortList
+Executes a network POST operation,"String uri, Map data",HttpResponse,NetworkService,"post, payload, request",2,sendPostRequest
+Copies a file from source to destination,"String srcPath, String destPath",boolean,FileUtils,"transfer, file, duplicate",2,copyFile
+Copies a file from source to destination,"File sourceFile, File targetFile",boolean,FileUtils,"copy, file, transfer",2,copyFile
+Uploads a local file to a server,"String localPath, String serverUrl",boolean,NetworkService,"file, transfer, network",2,uploadFile
+Purges repetitive items in the collection,List<Object> items,List<Object>,DataUtils,"duplicates, list, unique",1,removeDuplicates
+Determines if a file exists,String path,boolean,FileUtils,"file, check, verify",1,fileExists
+Calculates the difference between two values,"int minuend, int subtrahend",int,MathUtils,"difference, math, subtract",2,subtractNumbers
+Executes a network POST operation,"String endpoint, String jsonPayload",HttpResponse,NetworkService,"post, http, payload",2,sendPostRequest
+Joins two collections sequentially,"List<Object> list1, List<Object> list2",List<Object>,DataUtils,"combine, join, merge",2,mergeLists
+Loads text representation of a file,File file,String,FileUtils,"io, content, read",1,readFile
+Validates credentials threshold,String password,boolean,ValidationUtils,"validate, security, password",1,validatePassword
+Retrieves a document from the internet,"String url, String destination",boolean,NetworkService,"download, fetch, file",2,downloadFile
+Moves a file to a new location,"String oldPath, String newPath",boolean,FileUtils,"move, file, relocate",2,moveFile
+Ensures password has appropriate complexity,String password,boolean,ValidationUtils,"security, password, validate",1,validatePassword
+Concatenates elements of a list using a delimiter,"String[] items, String delimiter",String,StringUtils,"join, string, merge",2,joinStrings
+Gets data from an external web API,String endpoint,JsonObject,NetworkService,"data, fetch, json",1,fetchApiData
+Sends file byte data via network,"String localPath, String serverUrl",boolean,NetworkService,"network, transfer, file",2,uploadFile
+Breaks down a string into a list,"String str, String regex",List<String>,StringUtils,"delimiter, string, split",2,splitString
+Posts data to an API endpoint,"String uri, Map data",HttpResponse,NetworkService,"payload, post, http",2,sendPostRequest
+Separates text into an array based on a separator,"String input, char separator",List<String>,StringUtils,"separate, delimiter, string",2,splitString
+Transforms string to capitalized case,String inputText,String,StringUtils,"string, format, uppercase",1,capitalizeString
+Calculates the sum of two integers,"int num1, int num2",int,MathUtils,"arithmetic, sum, addition",2,addNumbers
+Downloads media from a server,"String url, String destination",boolean,NetworkService,"fetch, download, file",2,downloadFile
+Creates a copy of the file at the new path,"String srcPath, String destPath",boolean,FileUtils,"duplicate, transfer, file",2,copyFile
+Reverses a given string,char[] chars,String,StringUtils,"reverse, text, string",1,reverseString
+Capitalizes the first letter of a string,String inputText,String,StringUtils,"uppercase, capitalize, format",1,capitalizeString
+Flips the characters in the string,String input,String,StringUtils,"invert, reverse, text",1,reverseString
+Checks if a string is composed entirely of numbers,String val,boolean,ValidationUtils,"check, numeric, number",1,isNumeric
+Strips out duplicated entries,List<T> elements,List<Object>,DataUtils,"clean, list, unique",1,removeDuplicates
+Downloads media from a server,"String url, String destination",boolean,NetworkService,"network, file, fetch",2,downloadFile
+Returns the largest number in an array,int[] array,int,MathUtils,"max, maximum, largest",1,findMaximum
+Determines the average of the elements,List<int> items,float,MathUtils,"statistics, mean, average",1,calculateAverage
+Downloads a file from the network,"String url, String destination",boolean,NetworkService,"download, network, fetch",2,downloadFile
+Saves a remote file locally,"String remoteUrl, String localPath",boolean,NetworkService,"download, network, file",2,downloadFile
+Removes a file given its path,String targetPath,boolean,FileUtils,"remove, delete, erase",1,deleteFile
+Cleans up extra spaces at the beginning and end,String rawString,String,StringUtils,"format, clean, trim",1,trimWhitespace
+Computes the average score,float[] values,float,MathUtils,"math, statistics, average",1,calculateAverage
+Transfers file permanently to another directory,"String source, String destination",boolean,FileUtils,"move, rename, file",2,moveFile
+Generates a file with provided content,"String filePath, String content",void,FileUtils,"save, file, output",2,writeFile
+Combines multiple arrays together,"int[] first, int[] second",List<Object>,DataUtils,"join, list, combine",2,mergeLists
+Retrieves an HTTP response securely,URI uri,HttpResponse,NetworkService,"request, http, network",1,sendGetRequest
+Combines multiple strings with a separator,"List<String> parts, String separator",String,StringUtils,"join, concat, string",2,joinStrings
+Combines multiple strings with a separator,"List<String> parts, String separator",String,StringUtils,"merge, string, join",2,joinStrings
+Returns string without leading or trailing spaces,String input,String,StringUtils,"format, whitespace, trim",1,trimWhitespace
+Computes the division of numerator by denominator,"double numerator, double denominator",float,MathUtils,"math, quotient, fraction",2,divideNumbers
+Retrieves structured data from the server,String url,JsonObject,NetworkService,"fetch, json, api",1,fetchApiData
+Returns the total when adding two numbers together,"int first, int second",int,MathUtils,"addition, math, arithmetic",2,addNumbers
+Ensures the URL matches URI conventions,String url,boolean,ValidationUtils,"validate, link, web",1,validateURL
+Performs an HTTP GET request,String endpoint,HttpResponse,NetworkService,"request, get, network",1,sendGetRequest
+Computes the division of numerator by denominator,"double numerator, double denominator",float,MathUtils,"fraction, math, quotient",2,divideNumbers
+Returns a divided by b,"float num1, float num2",float,MathUtils,"quotient, fraction, math",2,divideNumbers
+Filters a list based on a given condition,"List<T> collection, Function filterFunc",List<Object>,DataUtils,"remove, list, filter",2,filterList
+Returns the result of subtracting two integers,"int a, int b",int,MathUtils,"subtract, math, difference",2,subtractNumbers
+Sends file byte data via network,"File file, String endpoint",boolean,NetworkService,"upload, network, file",2,uploadFile
+Strips out duplicated entries,List<T> elements,List<Object>,DataUtils,"unique, clean, duplicates",1,removeDuplicates
+Transmits local file to cloud storage,"String localPath, String serverUrl",boolean,NetworkService,"network, upload, transfer",2,uploadFile
+Confirms the web address formatting,String webAddress,boolean,ValidationUtils,"link, validate, format",1,validateURL
+Finds the difference between num1 and num2,"int num1, int num2",int,MathUtils,"math, difference, subtract",2,subtractNumbers
+Validates if the provided phone string is allowable,String phoneNumber,boolean,ValidationUtils,"phone, validate, check",1,validatePhone
+Cleans up list via a filter function,"List<Object> items, Predicate condition",List<Object>,DataUtils,"select, list, remove",2,filterList
+Trashes the specified file,String filePath,boolean,FileUtils,"file, erase, delete",1,deleteFile
+Calculates string length,String input,int,StringUtils,"length, count, characters",1,countCharacters
+Returns the product of the given values,"int num1, int num2",int,MathUtils,"math, times, multiply",2,multiplyNumbers
+Combines multiple strings with a separator,"List<String> list, String joiner",String,StringUtils,"string, concat, join",2,joinStrings
+Uploads a local file to a server,"String filePath, String url",boolean,NetworkService,"network, file, upload",2,uploadFile
+Sorts given items in ascending order,int[] array,List<Object>,DataUtils,"sort, arrange, list",1,sortList
+Calls a REST endpoint to retrieve data,String apiUrl,JsonObject,NetworkService,"fetch, api, json",1,fetchApiData
+Validates whether a generic file path is accessible,String path,boolean,FileUtils,"check, verify, file",1,fileExists
+Validates whether the text input is a numeric type,String text,boolean,ValidationUtils,"validate, numeric, digits",1,isNumeric
+Ensures the URL matches URI conventions,String url,boolean,ValidationUtils,"url, web, validate",1,validateURL
+Returns unique elements only from an array,List<Object> items,List<Object>,DataUtils,"unique, clean, list",1,removeDuplicates
+Retrieves the min value from the given list,List<int> numbers,int,MathUtils,"min, minimum, smallest",1,findMinimum
+Reads all content from a file,String filePath,String,FileUtils,"content, file, io",1,readFile
+Performs addition on two numeric inputs,"int num1, int num2",int,MathUtils,"math, addition, sum",2,addNumbers
+Reverses a given string,String str,String,StringUtils,"text, string, invert",1,reverseString
+Validates if the provided phone string is allowable,String phoneNumber,boolean,ValidationUtils,"phone, number, check",1,validatePhone
+Tokensizes the string using delimiter,"String input, char separator",List<String>,StringUtils,"split, string, delimiter",2,splitString
+Separates text into an array based on a separator,"String text, String delimiter",List<String>,StringUtils,"string, separate, split",2,splitString
+Divides the first number by the second,"double numerator, double denominator",float,MathUtils,"fraction, quotient, divide",2,divideNumbers
+Relocates a file on the disk,"String source, String destination",boolean,FileUtils,"relocate, move, file",2,moveFile
+Checks if a file exists at the given path,String location,boolean,FileUtils,"exists, verify, check",1,fileExists
+Flips the characters in the string,String input,String,StringUtils,"invert, reverse, text",1,reverseString
+Appends one list to another,"List<Object> list1, List<Object> list2",List<Object>,DataUtils,"join, combine, list",2,mergeLists
+Deletes a file from the filesystem,String filePath,boolean,FileUtils,"erase, delete, file",1,deleteFile
+Checks if the phone number is valid,String phoneNumber,boolean,ValidationUtils,"phone, validate, number",1,validatePhone
+Calculates the quotient of two values,"float num1, float num2",float,MathUtils,"math, divide, quotient",2,divideNumbers
+Divides the first number by the second,"double numerator, double denominator",float,MathUtils,"math, quotient, fraction",2,divideNumbers
+Replicates file data to another location,"String source, String destination",boolean,FileUtils,"file, copy, transfer",2,copyFile
+Verifies whether an email contains valid characters and domain,String email,boolean,ValidationUtils,"email, format, check",1,validateEmail
+Validates email utilizing regex,String email,boolean,ValidationUtils,"validate, format, email",1,validateEmail
+Posts data to an API endpoint,"String uri, Map data",HttpResponse,NetworkService,"network, payload, http",2,sendPostRequest
+Gets the maximum integer,int[] array,int,MathUtils,"max, highest, math",1,findMaximum
+Gets the maximum integer,List<int> numbers,int,MathUtils,"largest, highest, maximum",1,findMaximum
+Transmits local file to cloud storage,"String localPath, String serverUrl",boolean,NetworkService,"network, transfer, upload",2,uploadFile
+Clears a file from the disk,String filePath,boolean,FileUtils,"remove, delete, erase",1,deleteFile
+Validates user-provided link structures,String url,boolean,ValidationUtils,"validate, format, url",1,validateURL
+Performs addition on two numeric inputs,"int a, int b",int,MathUtils,"math, add, sum",2,addNumbers
+Retrieves an HTTP response securely,URI uri,HttpResponse,NetworkService,"network, get, http",1,sendGetRequest
+Ensures the string starts with a capital letter,String str,String,StringUtils,"string, format, capitalize",1,capitalizeString
+Generates a file with provided content,"File file, String text",void,FileUtils,"io, write, save",2,writeFile
+Validates user-provided link structures,String url,boolean,ValidationUtils,"url, web, format",1,validateURL
+Determines if an address is properly formed,String targetEmail,boolean,ValidationUtils,"format, validate, email",1,validateEmail
+Finds the mean value from an array,List<float> numbers,float,MathUtils,"mean, statistics, math",1,calculateAverage
+Reads all content from a file,File file,String,FileUtils,"file, read, io",1,readFile
+Trims whitespace from both ends of text,String input,String,StringUtils,"format, whitespace, trim",1,trimWhitespace
+Gets the maximum integer,List<int> numbers,int,MathUtils,"math, max, largest",1,findMaximum
+Returns the characters of a string in reverse order,String input,String,StringUtils,"text, reverse, invert",1,reverseString
+Saves a remote file locally,"String remoteUrl, String localPath",boolean,NetworkService,"fetch, network, download",2,downloadFile
+Uploads a local file to a server,"String filePath, String url",boolean,NetworkService,"upload, transfer, file",2,uploadFile
+Gets the total character count,String input,int,StringUtils,"length, characters, count",1,countCharacters
+Fetches data from a URL using GET,String endpoint,HttpResponse,NetworkService,"network, get, request",1,sendGetRequest
+Finds the maximum value in a collection,List<int> numbers,int,MathUtils,"largest, math, max",1,findMaximum
+Verifies numeric text representation,String text,boolean,ValidationUtils,"numeric, digits, validate",1,isNumeric
+Capitalizes the first letter of a string,String inputText,String,StringUtils,"format, uppercase, capitalize",1,capitalizeString
+Confirms the web address formatting,String url,boolean,ValidationUtils,"web, link, validate",1,validateURL
+Computes the overall total of numeric values,List<int> items,int,DataUtils,"calculate, sum, list",1,calculateSum
+Calculates the difference between two values,"int minuend, int subtrahend",int,MathUtils,"subtract, difference, math",2,subtractNumbers
+Performs an HTTP GET request,String endpoint,HttpResponse,NetworkService,"http, network, request",1,sendGetRequest
+Sends file byte data via network,"String filePath, String url",boolean,NetworkService,"network, file, transfer",2,uploadFile
+Outputs the given string to a file path,"File file, String text",void,FileUtils,"write, io, file",2,writeFile
+Identifies the lowest number,int[] array,int,MathUtils,"minimum, min, lowest",1,findMinimum
+Ensures the string starts with a capital letter,String text,String,StringUtils,"uppercase, string, format",1,capitalizeString
+Removes a file given its path,String filePath,boolean,FileUtils,"delete, remove, file",1,deleteFile
+Merges a list of strings into a single text,"String[] items, String delimiter",String,StringUtils,"join, concat, merge",2,joinStrings
+Clears a file from the disk,String filePath,boolean,FileUtils,"delete, file, remove",1,deleteFile
+Duplicates an existing file,"String srcPath, String destPath",boolean,FileUtils,"duplicate, file, copy",2,copyFile
+Removes leading and trailing spaces from a string,String rawString,String,StringUtils,"trim, whitespace, clean",1,trimWhitespace
