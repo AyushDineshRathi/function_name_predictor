@@ -1,6 +1,7 @@
 from pathlib import Path
 import re
 import time
+import warnings
 import joblib
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -12,6 +13,19 @@ INFERENCE_SPEED_REPORT_PATH = REPORTS_DIR / "inference_speed.txt"
 # Global variables to cache the model and vectorizer
 _model = None
 _vectorizer = None
+
+def _load_pickle_with_version_check(file_path: Path, artifact_name: str):
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        loaded = joblib.load(file_path)
+
+    version_warnings = [w for w in caught if w.category.__name__ == "InconsistentVersionWarning"]
+    if version_warnings:
+        raise RuntimeError(
+            f"{artifact_name} is incompatible with current scikit-learn version. "
+            "Please run: python run_pipeline.py"
+        )
+    return loaded
 
 def normalize_text(text: str) -> str:
     if text is None:
@@ -39,12 +53,12 @@ def load_resources(model_path=None, vectorizer_path=None):
     if _model is None:
         if not model_file.exists():
             raise FileNotFoundError("Models not found. Please run: python run_pipeline.py")
-        _model = joblib.load(model_file)
+        _model = _load_pickle_with_version_check(model_file, "Model file")
         
     if _vectorizer is None:
         if not vectorizer_file.exists():
             raise FileNotFoundError("Models not found. Please run: python run_pipeline.py")
-        _vectorizer = joblib.load(vectorizer_file)
+        _vectorizer = _load_pickle_with_version_check(vectorizer_file, "Vectorizer file")
 
 def predict_function(metadata_text: str) -> str:
     """
@@ -108,5 +122,5 @@ if __name__ == "__main__":
         print(f"Predicted Function: {predicted_name}\n")
         print(f"Inference latency: {latency_ms:.4f} ms")
         print(f"Speed report saved to: {INFERENCE_SPEED_REPORT_PATH}")
-    except FileNotFoundError as e:
+    except (FileNotFoundError, RuntimeError) as e:
         print(f"Error: {e}")

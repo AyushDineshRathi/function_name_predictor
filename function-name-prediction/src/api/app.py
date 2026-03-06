@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -18,24 +19,20 @@ class PredictRequest(BaseModel):
 class PredictResponse(BaseModel):
     predicted_function: str
 
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    print("Starting up Function Name Predictor API...")
+    load_resources()
+    print("Models loaded successfully.")
+    yield
+
 # Initialize the FastAPI app
 app = FastAPI(
     title="Function Name Predictor API",
     description="A lightweight API that predicts a function name from structured function metadata.",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan,
 )
-
-# Load the models when the application starts
-@app.on_event("startup")
-async def startup_event():
-    print("Starting up Function Name Predictor API...")
-    try:
-        load_resources()
-        print("Models loaded successfully.")
-    except Exception as e:
-        print(f"Error loading models: {e}")
-        # In a real production app, we might want to log this and potentially stop the app,
-        # but for this lightweight version, we'll let it handle errors during the request.
 
 @app.post("/predict", response_model=PredictResponse)
 async def predict(request: PredictRequest):
@@ -52,9 +49,12 @@ async def predict(request: PredictRequest):
         
         # Return result
         return PredictResponse(predicted_function=predicted_name)
-        
-    except FileNotFoundError as e:
+    except HTTPException:
+        raise
+    except FileNotFoundError:
         raise HTTPException(status_code=500, detail="Models not found. Please run: python run_pipeline.py")
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred during prediction: {str(e)}")
 
@@ -67,6 +67,6 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    # Make sure we use the correct path or module reference depending on from where it's run
     print("Starting API with uvicorn...")
+    print("Open API docs at: http://127.0.0.1:8000/docs")
     uvicorn.run("src.api.app:app", host="0.0.0.0", port=8000, reload=True)
