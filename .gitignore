@@ -1,1 +1,10 @@
 venv
+function-name-prediction/src/features/__pycache__
+function-name-prediction/src/models/__pycache__
+function-name-prediction/src/inference/__pycache__
+function-name-prediction/src/data/__pycache__
+function-name-prediction/src/__pycache__
+function-name-prediction/src/api/__pycache__
+function-name-prediction/src/preprocessing/__pycache__
+function-name-prediction/models/function_model.pkl
+function-name-prediction/models/vectorizer.pkl

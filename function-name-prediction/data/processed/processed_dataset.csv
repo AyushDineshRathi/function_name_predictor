@@ -1,0 +1,381 @@
+combined_metadata,function_name
+calls a rest endpoint to retrieve data string apiurl return jsonobject library networkservice keywords json rest fetch params 1,fetchApiData
+gets the total character count string input return int library stringutils keywords count string characters params 1,countCharacters
+removes elements that do not match the predicate list object items predicate condition return list object library datautils keywords remove select filter params 2,filterList
+trims whitespace from both ends of text string text return string library stringutils keywords trim format whitespace params 1,trimWhitespace
+separates text into an array based on a separator string text string delimiter return list string library stringutils keywords string separate split params 2,splitString
+uploads a local file to a server string localpath string serverurl return boolean library networkservice keywords network file upload params 2,uploadFile
+returns the length of the provided text string text return int library stringutils keywords string length characters params 1,countCharacters
+strips out duplicated entries list t elements return list object library datautils keywords unique list duplicates params 1,removeDuplicates
+validates credentials threshold string rawpassword return boolean library validationutils keywords password check security params 1,validatePassword
+saves content into a file file file string text return void library fileutils keywords save output write params 2,writeFile
+performs a division operation float a float b return float library mathutils keywords fraction divide math params 2,divideNumbers
+returns the aggregate sum list int items return int library datautils keywords math list total params 1,calculateSum
+calculates the sum of two integers int first int second return int library mathutils keywords add addition arithmetic params 2,addNumbers
+ensures the url matches uri conventions string link return boolean library validationutils keywords web url link params 1,validateURL
+multiplies two numbers together int num1 int num2 return int library mathutils keywords multiply product math params 2,multiplyNumbers
+verifies numeric text representation string text return boolean library validationutils keywords numeric check validate params 1,isNumeric
+fetches file bytes from a url to local storage string url string destination return boolean library networkservice keywords download fetch network params 2,downloadFile
+fetches json data from an api string apiurl return jsonobject library networkservice keywords fetch data api params 1,fetchApiData
+transmits local file to cloud storage string filepath string url return boolean library networkservice keywords network transfer upload params 2,uploadFile
+retrieves the max value from the given list list float items return int library mathutils keywords highest max maximum params 1,findMaximum
+retrieves the max value from the given list list float items return int library mathutils keywords maximum largest math params 1,findMaximum
+posts data to an api endpoint string endpoint string jsonpayload return httpresponse library networkservice keywords request http network params 2,sendPostRequest
+flips the characters in the string string input return string library stringutils keywords text reverse string params 1,reverseString
+determines if a file exists string path return boolean library fileutils keywords verify exists check params 1,fileExists
+flips the characters in the string string text return string library stringutils keywords invert text string params 1,reverseString
+gets the smallest integer list int numbers return int library mathutils keywords lowest min math params 1,findMinimum
+computes the division of numerator by denominator double numerator double denominator return float library mathutils keywords fraction divide math params 2,divideNumbers
+tokensizes the string using delimiter string input char separator return list string library stringutils keywords separate split delimiter params 2,splitString
+retrieves an http response securely string endpoint return httpresponse library networkservice keywords request http get params 1,sendGetRequest
+deletes a file from the filesystem string targetpath return boolean library fileutils keywords file delete erase params 1,deleteFile
+returns unique elements only from an array list t elements return list object library datautils keywords list clean duplicates params 1,removeDuplicates
+combines multiple arrays together int first int second return list object library datautils keywords combine list join params 2,mergeLists
+performs an http get request string url return httpresponse library networkservice keywords http network request params 1,sendGetRequest
+loads text representation of a file string filepath return string library fileutils keywords content file io params 1,readFile
+posts a document to an api endpoint string localpath string serverurl return boolean library networkservice keywords network file upload params 2,uploadFile
+creates a reversed copy of the string char chars return string library stringutils keywords text invert string params 1,reverseString
+converts the string to title case string text return string library stringutils keywords format capitalize uppercase params 1,capitalizeString
+adds two integers and returns their sum integer x integer y return int library mathutils keywords arithmetic math add params 2,addNumbers
+validates password strength according to rules string password return boolean library validationutils keywords validate password check params 1,validatePassword
+retrieves data from the specified path file file return string library fileutils keywords content read file params 1,readFile
+retrieves data from the specified path string filepath return string library fileutils keywords content io read params 1,readFile
+ensures the string starts with a capital letter string inputtext return string library stringutils keywords uppercase string capitalize params 1,capitalizeString
+saves a remote file locally string remoteurl string localpath return boolean library networkservice keywords file network fetch params 2,downloadFile
+computes the average score list int items return float library mathutils keywords math average statistics params 1,calculateAverage
+sorts given items in ascending order int array return list object library datautils keywords arrange sort order params 1,sortList
+combines multiple strings with a separator list string list string joiner return string library stringutils keywords join string concat params 2,joinStrings
+splits a string by a given delimiter string text string delimiter return list string library stringutils keywords split separate delimiter params 2,splitString
+retrieves the min value from the given list int array return int library mathutils keywords min lowest smallest params 1,findMinimum
+returns true if the file is present on disk string location return boolean library fileutils keywords check exists verify params 1,fileExists
+returns the product of the given values int a int b return int library mathutils keywords times product math params 2,multiplyNumbers
+computes the average score list float numbers return float library mathutils keywords average statistics mean params 1,calculateAverage
+finds the difference between num1 and num2 int num1 int num2 return int library mathutils keywords subtract difference math params 2,subtractNumbers
+validates credentials threshold string password return boolean library validationutils keywords security check validate params 1,validatePassword
+joins two collections sequentially int first int second return list object library datautils keywords join combine merge params 2,mergeLists
+gets data from an external web api string url return jsonobject library networkservice keywords fetch api data params 1,fetchApiData
+executes a network get call uri uri return httpresponse library networkservice keywords http network request params 1,sendGetRequest
+checks if a file exists at the given path string location return boolean library fileutils keywords exists check file params 1,fileExists
+posts a document to an api endpoint string localpath string serverurl return boolean library networkservice keywords transfer file network params 2,uploadFile
+performs an http post string uri map data return httpresponse library networkservice keywords payload http post params 2,sendPostRequest
+calculates string length string input return int library stringutils keywords characters string count params 1,countCharacters
+gets the total character count string input return int library stringutils keywords length characters count params 1,countCharacters
+retrieves an http response securely string endpoint return httpresponse library networkservice keywords http get network params 1,sendGetRequest
+strips out duplicated entries list object items return list object library datautils keywords clean list unique params 1,removeDuplicates
+makes the first character of the text uppercase string inputtext return string library stringutils keywords format capitalize uppercase params 1,capitalizeString
+calculates x times y int a int b return int library mathutils keywords math times multiply params 2,multiplyNumbers
+removes elements that do not match the predicate list t collection function filterfunc return list object library datautils keywords select filter list params 2,filterList
+computes the addition of a and b int num1 int num2 return int library mathutils keywords sum addition math params 2,addNumbers
+strips whitespace characters string text return string library stringutils keywords clean whitespace trim params 1,trimWhitespace
+clears a file from the disk string targetpath return boolean library fileutils keywords remove delete file params 1,deleteFile
+relocates a file on the disk string source string destination return boolean library fileutils keywords file relocate move params 2,moveFile
+calculates string length string text return int library stringutils keywords string characters count params 1,countCharacters
+keeps items matching criteria in the array list t collection function filterfunc return list object library datautils keywords list select remove params 2,filterList
+finds the mean value from an array list float numbers return float library mathutils keywords average math statistics params 1,calculateAverage
+totals the list values incrementally double array return int library datautils keywords math sum total params 1,calculateSum
+duplicates an existing file file sourcefile file targetfile return boolean library fileutils keywords duplicate copy file params 2,copyFile
+saves content into a file file file string text return void library fileutils keywords save write io params 2,writeFile
+validates whether a generic file path is accessible string location return boolean library fileutils keywords file verify check params 1,fileExists
+validates whether the text input is a numeric type string str return boolean library validationutils keywords check numeric digits params 1,isNumeric
+separates text into an array based on a separator string str string regex return list string library stringutils keywords separate string delimiter params 2,splitString
+merges a list of strings into a single text list string list string joiner return string library stringutils keywords string concat join params 2,joinStrings
+finds the product of a and b int a int b return int library mathutils keywords times math product params 2,multiplyNumbers
+combines multiple arrays together list object list1 list object list2 return list object library datautils keywords combine join list params 2,mergeLists
+concatenates elements of a list using a delimiter list string parts string separator return string library stringutils keywords merge concat join params 2,joinStrings
+confirms telephone numbers digit constraints string mobile return boolean library validationutils keywords check phone number params 1,validatePhone
+returns true if the file is present on disk string filepath return boolean library fileutils keywords exists file verify params 1,fileExists
+fetches data from a url using get string endpoint return httpresponse library networkservice keywords get network request params 1,sendGetRequest
+totals the list values incrementally list int items return int library datautils keywords math list sum params 1,calculateSum
+performs an http get request string endpoint return httpresponse library networkservice keywords http network get params 1,sendGetRequest
+erases the file completely file file return boolean library fileutils keywords delete remove erase params 1,deleteFile
+gets the maximum integer int array return int library mathutils keywords largest maximum math params 1,findMaximum
+computes the overall total of numeric values double array return int library datautils keywords math total sum params 1,calculateSum
+joins an array of strings into one list string parts string separator return string library stringutils keywords join concat merge params 2,joinStrings
+retrieves data from the specified path string filepath return string library fileutils keywords read file content params 1,readFile
+checks if a file exists at the given path string filepath return boolean library fileutils keywords check verify exists params 1,fileExists
+submits form or json data to a server string endpoint string jsonpayload return httpresponse library networkservice keywords payload post network params 2,sendPostRequest
+executes a network post operation string uri map data return httpresponse library networkservice keywords post request http params 2,sendPostRequest
+returns the aggregate sum list float numbers return int library datautils keywords calculate total sum params 1,calculateSum
+counts the number of characters in a string string input return int library stringutils keywords count length characters params 1,countCharacters
+retrieves a document from the internet string url string destination return boolean library networkservice keywords file download fetch params 2,downloadFile
+transfers file permanently to another directory string oldpath string newpath return boolean library fileutils keywords file rename relocate params 2,moveFile
+checks if a string is composed entirely of numbers string val return boolean library validationutils keywords check validate numeric params 1,isNumeric
+calculates the sum of two integers int a int b return int library mathutils keywords add arithmetic math params 2,addNumbers
+finds the maximum value in a collection int array return int library mathutils keywords highest largest max params 1,findMaximum
+validates the format of an email address string targetemail return boolean library validationutils keywords format check email params 1,validateEmail
+renames or moves a file path string source string destination return boolean library fileutils keywords file relocate move params 2,moveFile
+returns the characters of a string in reverse order char chars return string library stringutils keywords reverse text string params 1,reverseString
+checks if a given string is a valid url string link return boolean library validationutils keywords link format validate params 1,validateURL
+gets the smallest integer int array return int library mathutils keywords math min lowest params 1,findMinimum
+returns the characters of a string in reverse order string str return string library stringutils keywords string text reverse params 1,reverseString
+validates email utilizing regex string targetemail return boolean library validationutils keywords format check validate params 1,validateEmail
+keeps items matching criteria in the array list t collection function filterfunc return list object library datautils keywords list filter select params 2,filterList
+retrieves the min value from the given list list int numbers return int library mathutils keywords minimum smallest lowest params 1,findMinimum
+finds the mean value from an array list float numbers return float library mathutils keywords mean math statistics params 1,calculateAverage
+performs an http get request string url return httpresponse library networkservice keywords get request network params 1,sendGetRequest
+filters a list based on a given condition list t collection function filterfunc return list object library datautils keywords select remove filter params 2,filterList
+finds the product of a and b float x float y return int library mathutils keywords product multiply times params 2,multiplyNumbers
+trims whitespace from both ends of text string rawstring return string library stringutils keywords trim clean format params 1,trimWhitespace
+returns the characters of a string in reverse order string text return string library stringutils keywords string text invert params 1,reverseString
+uploads a local file to a server file file string endpoint return boolean library networkservice keywords network transfer file params 2,uploadFile
+strips whitespace characters string rawstring return string library stringutils keywords trim whitespace clean params 1,trimWhitespace
+transforms string to capitalized case string inputtext return string library stringutils keywords uppercase format string params 1,capitalizeString
+merges a list of strings into a single text list string list string joiner return string library stringutils keywords string merge concat params 2,joinStrings
+cleans up list via a filter function list object items predicate condition return list object library datautils keywords remove list select params 2,filterList
+orders the elements in an array sequentially list t collection return list object library datautils keywords order sort arrange params 1,sortList
+clears a file from the disk file file return boolean library fileutils keywords erase file delete params 1,deleteFile
+ensures the url matches uri conventions string link return boolean library validationutils keywords link url web params 1,validateURL
+moves a file to a new location string source string destination return boolean library fileutils keywords rename move relocate params 2,moveFile
+checks if a given string is a valid url string link return boolean library validationutils keywords link web validate params 1,validateURL
+fetches json data from an api string url return jsonobject library networkservice keywords data fetch rest params 1,fetchApiData
+validates the format of an email address string targetemail return boolean library validationutils keywords format email validate params 1,validateEmail
+validates user provided link structures string link return boolean library validationutils keywords url format web params 1,validateURL
+erases the file completely string targetpath return boolean library fileutils keywords remove file delete params 1,deleteFile
+verifies numeric text representation string text return boolean library validationutils keywords validate check number params 1,isNumeric
+totals the list values incrementally list int items return int library datautils keywords sum list total params 1,calculateSum
+replicates file data to another location file sourcefile file targetfile return boolean library fileutils keywords transfer file duplicate params 2,copyFile
+returns the product of the given values int a int b return int library mathutils keywords times product math params 2,multiplyNumbers
+transfers file permanently to another directory string source string destination return boolean library fileutils keywords move relocate file params 2,moveFile
+fetches json data from an api string apiurl return jsonobject library networkservice keywords api data fetch params 1,fetchApiData
+performs addition on two numeric inputs int first int second return int library mathutils keywords sum arithmetic math params 2,addNumbers
+deletes a file from the filesystem file file return boolean library fileutils keywords remove file erase params 1,deleteFile
+extracs matching elements list object items predicate condition return list object library datautils keywords select filter remove params 2,filterList
+calls a rest endpoint to retrieve data string endpoint return jsonobject library networkservice keywords rest json fetch params 1,fetchApiData
+ensures the string starts with a capital letter string str return string library stringutils keywords string format uppercase params 1,capitalizeString
+fetches file bytes from a url to local storage string url string destination return boolean library networkservice keywords network file download params 2,downloadFile
+posts a document to an api endpoint file file string endpoint return boolean library networkservice keywords upload file transfer params 2,uploadFile
+determines the average of the elements list int items return float library mathutils keywords average math mean params 1,calculateAverage
+calculates the quotient of two values float a float b return float library mathutils keywords quotient fraction divide params 2,divideNumbers
+verifies mobile number format string mobile return boolean library validationutils keywords phone number validate params 1,validatePhone
+returns the length of the provided text string text return int library stringutils keywords count characters length params 1,countCharacters
+generates a file with provided content string filepath string content return void library fileutils keywords output io write params 2,writeFile
+arranges the list elements list object items return list object library datautils keywords list sort arrange params 1,sortList
+retrieves the max value from the given list int array return int library mathutils keywords largest max highest params 1,findMaximum
+retrieves structured data from the server string apiurl return jsonobject library networkservice keywords fetch rest json params 1,fetchApiData
+validates whether a generic file path is accessible string filepath return boolean library fileutils keywords exists verify check params 1,fileExists
+clears a file from the disk file file return boolean library fileutils keywords delete file erase params 1,deleteFile
+uploads a local file to a server file file string endpoint return boolean library networkservice keywords file transfer upload params 2,uploadFile
+merges two distinct lists into one list object list1 list object list2 return list object library datautils keywords list combine merge params 2,mergeLists
+returns true if the string is parseable to number string input return boolean library validationutils keywords check numeric digits params 1,isNumeric
+retrieves data from the specified path file file return string library fileutils keywords file io read params 1,readFile
+cleans up list via a filter function list t collection function filterfunc return list object library datautils keywords remove list select params 2,filterList
+checks if the phone number is valid string phonenumber return boolean library validationutils keywords number phone validate params 1,validatePhone
+adds two integers and returns their sum int first int second return int library mathutils keywords math add sum params 2,addNumbers
+verifies web address format string link return boolean library validationutils keywords web url format params 1,validateURL
+confirms telephone numbers digit constraints string phonenumber return boolean library validationutils keywords check phone validate params 1,validatePhone
+checks if an email string is structurally sound string email return boolean library validationutils keywords email check format params 1,validateEmail
+trims whitespace from both ends of text string input return string library stringutils keywords trim clean format params 1,trimWhitespace
+calls a rest endpoint to retrieve data string apiurl return jsonobject library networkservice keywords rest data json params 1,fetchApiData
+concatenates array sets into a single list list object list1 list object list2 return list object library datautils keywords merge list join params 2,mergeLists
+returns the product of the given values int a int b return int library mathutils keywords math multiply product params 2,multiplyNumbers
+finds the minimum value in a collection int array return int library mathutils keywords min lowest math params 1,findMinimum
+merges a list of strings into a single text list string list string joiner return string library stringutils keywords concat join merge params 2,joinStrings
+parses file into a string format file file return string library fileutils keywords file content read params 1,readFile
+divides a string into multiple parts string input char separator return list string library stringutils keywords separate split string params 2,splitString
+moves a file to a new location string oldpath string newpath return boolean library fileutils keywords file relocate move params 2,moveFile
+determines the average of the elements list int items return float library mathutils keywords average math mean params 1,calculateAverage
+uploads a local file to a server file file string endpoint return boolean library networkservice keywords upload file transfer params 2,uploadFile
+determines if a file exists string path return boolean library fileutils keywords file check verify params 1,fileExists
+finds the product of a and b int num1 int num2 return int library mathutils keywords math multiply product params 2,multiplyNumbers
+retrieves data from the specified path file file return string library fileutils keywords read content io params 1,readFile
+appends one list to another list object list1 list object list2 return list object library datautils keywords list combine join params 2,mergeLists
+downloads a file from the network string remoteurl string localpath return boolean library networkservice keywords download file network params 2,downloadFile
+posts a document to an api endpoint file file string endpoint return boolean library networkservice keywords upload file network params 2,uploadFile
+returns a divided by b float a float b return float library mathutils keywords fraction quotient divide params 2,divideNumbers
+ensures the telephone follows proper length string mobile return boolean library validationutils keywords validate phone number params 1,validatePhone
+posts data to an api endpoint string endpoint string jsonpayload return httpresponse library networkservice keywords post payload network params 2,sendPostRequest
+fetches file bytes from a url to local storage string url string destination return boolean library networkservice keywords network file download params 2,downloadFile
+executes a network get call string endpoint return httpresponse library networkservice keywords http get network params 1,sendGetRequest
+validates password strength according to rules string rawpassword return boolean library validationutils keywords check password validate params 1,validatePassword
+validates user provided link structures string link return boolean library validationutils keywords format link validate params 1,validateURL
+confirms telephone numbers digit constraints string mobile return boolean library validationutils keywords number validate phone params 1,validatePhone
+flips the characters in the string string text return string library stringutils keywords string invert reverse params 1,reverseString
+checks if a file exists at the given path string path return boolean library fileutils keywords verify exists file params 1,fileExists
+outputs the given string to a file path string filepath string content return void library fileutils keywords save output file params 2,writeFile
+computes the multiplication of two integers float x float y return int library mathutils keywords times product math params 2,multiplyNumbers
+removes leading and trailing spaces from a string string text return string library stringutils keywords whitespace trim clean params 1,trimWhitespace
+performs an http post string url object body return httpresponse library networkservice keywords http request post params 2,sendPostRequest
+verifies whether an email contains valid characters and domain string email return boolean library validationutils keywords format email validate params 1,validateEmail
+verifies that string is a strong password string password return boolean library validationutils keywords security validate password params 1,validatePassword
+returns the largest number in an array int array return int library mathutils keywords math largest maximum params 1,findMaximum
+returns the result of subtracting two integers int num1 int num2 return int library mathutils keywords difference minus subtract params 2,subtractNumbers
+divides the first number by the second float a float b return float library mathutils keywords divide fraction quotient params 2,divideNumbers
+reads all content from a file file file return string library fileutils keywords io read file params 1,readFile
+fetches json data from an api string endpoint return jsonobject library networkservice keywords rest fetch api params 1,fetchApiData
+performs addition on two numeric inputs integer x integer y return int library mathutils keywords sum arithmetic add params 2,addNumbers
+validates password strength according to rules string rawpassword return boolean library validationutils keywords password validate check params 1,validatePassword
+uploads media content file file string endpoint return boolean library networkservice keywords transfer file network params 2,uploadFile
+inverts a text sequence string str return string library stringutils keywords text reverse invert params 1,reverseString
+calculates the sum of two integers int first int second return int library mathutils keywords math add sum params 2,addNumbers
+confirms telephone numbers digit constraints string mobile return boolean library validationutils keywords number check phone params 1,validatePhone
+verifies whether an email contains valid characters and domain string emailaddress return boolean library validationutils keywords check email validate params 1,validateEmail
+executes a network post operation string url object body return httpresponse library networkservice keywords payload http request params 2,sendPostRequest
+saves a remote file locally string remoteurl string localpath return boolean library networkservice keywords fetch download network params 2,downloadFile
+retrieves structured data from the server string apiurl return jsonobject library networkservice keywords rest fetch api params 1,fetchApiData
+identifies the highest number int array return int library mathutils keywords math max maximum params 1,findMaximum
+returns unique elements only from an array list t elements return list object library datautils keywords unique duplicates clean params 1,removeDuplicates
+outputs the given string to a file path string path string data return void library fileutils keywords file write save params 2,writeFile
+finds how many characters are in a string string text return int library stringutils keywords characters count string params 1,countCharacters
+returns unique elements only from an array list t elements return list object library datautils keywords unique duplicates clean params 1,removeDuplicates
+returns a sorted copy of the collection int array return list object library datautils keywords arrange sort list params 1,sortList
+computes the subtraction of b from a int num1 int num2 return int library mathutils keywords subtract math difference params 2,subtractNumbers
+sends an http post request with a payload string url object body return httpresponse library networkservice keywords network post payload params 2,sendPostRequest
+finds the product of a and b int a int b return int library mathutils keywords times product multiply params 2,multiplyNumbers
+writes text data to a file on disk file file string text return void library fileutils keywords output save file params 2,writeFile
+gets the smallest integer int array return int library mathutils keywords math lowest minimum params 1,findMinimum
+ensures the telephone follows proper length string mobile return boolean library validationutils keywords check phone number params 1,validatePhone
+shifts file to a destination path string oldpath string newpath return boolean library fileutils keywords move rename relocate params 2,moveFile
+computes the average score list float numbers return float library mathutils keywords math mean average params 1,calculateAverage
+checks if a given string is a valid url string url return boolean library validationutils keywords url web validate params 1,validateURL
+replicates file data to another location string source string destination return boolean library fileutils keywords transfer file copy params 2,copyFile
+removes elements that do not match the predicate list t collection function filterfunc return list object library datautils keywords list filter remove params 2,filterList
+sorts given items in ascending order int array return list object library datautils keywords arrange sort order params 1,sortList
+returns true if the string is parseable to number string str return boolean library validationutils keywords check number digits params 1,isNumeric
+ensures the url matches uri conventions string link return boolean library validationutils keywords validate url link params 1,validateURL
+validates if the provided phone string is allowable string mobile return boolean library validationutils keywords check phone validate params 1,validatePhone
+separates text into an array based on a separator string input char separator return list string library stringutils keywords string separate split params 2,splitString
+validates password strength according to rules string rawpassword return boolean library validationutils keywords password validate security params 1,validatePassword
+performs addition on two numeric inputs int num1 int num2 return int library mathutils keywords sum math add params 2,addNumbers
+determines the average of the elements list int items return float library mathutils keywords math mean statistics params 1,calculateAverage
+divides a string into multiple parts string text string delimiter return list string library stringutils keywords split delimiter separate params 2,splitString
+returns a divided by b float a float b return float library mathutils keywords divide fraction math params 2,divideNumbers
+finds the mean value from an array float values return float library mathutils keywords average mean statistics params 1,calculateAverage
+duplicates an existing file string source string destination return boolean library fileutils keywords transfer copy duplicate params 2,copyFile
+trims whitespace from both ends of text string rawstring return string library stringutils keywords format trim clean params 1,trimWhitespace
+totals the list values incrementally list float numbers return int library datautils keywords sum total list params 1,calculateSum
+performs addition on two numeric inputs int first int second return int library mathutils keywords addition arithmetic sum params 2,addNumbers
+filters a list based on a given condition list object items predicate condition return list object library datautils keywords filter list remove params 2,filterList
+downloads a file from the network string url string destination return boolean library networkservice keywords network download file params 2,downloadFile
+validates credentials threshold string rawpassword return boolean library validationutils keywords check security validate params 1,validatePassword
+returns a sorted copy of the collection list t collection return list object library datautils keywords arrange list order params 1,sortList
+executes a network get call string url return httpresponse library networkservice keywords get request network params 1,sendGetRequest
+verifies that string is a strong password string password return boolean library validationutils keywords validate check password params 1,validatePassword
+submits form or json data to a server string endpoint string jsonpayload return httpresponse library networkservice keywords post request payload params 2,sendPostRequest
+verifies that string is a strong password string rawpassword return boolean library validationutils keywords validate security password params 1,validatePassword
+renames or moves a file path string source string destination return boolean library fileutils keywords move file rename params 2,moveFile
+purges repetitive items in the collection list object items return list object library datautils keywords list unique duplicates params 1,removeDuplicates
+downloads media from a server string url string destination return boolean library networkservice keywords fetch download network params 2,downloadFile
+validates email utilizing regex string targetemail return boolean library validationutils keywords email format validate params 1,validateEmail
+deletes a file from the filesystem string targetpath return boolean library fileutils keywords file remove erase params 1,deleteFile
+determines the average of the elements float values return float library mathutils keywords average mean statistics params 1,calculateAverage
+calculates the quotient of two values float num1 float num2 return float library mathutils keywords math divide quotient params 2,divideNumbers
+returns true if the string is parseable to number string str return boolean library validationutils keywords check digits numeric params 1,isNumeric
+returns the characters of a string in reverse order string str return string library stringutils keywords invert text reverse params 1,reverseString
+confirms telephone numbers digit constraints string phonenumber return boolean library validationutils keywords number validate phone params 1,validatePhone
+tokensizes the string using delimiter string input char separator return list string library stringutils keywords split string delimiter params 2,splitString
+merges two distinct lists into one list t a list t b return list object library datautils keywords join list combine params 2,mergeLists
+copies a file from source to destination string srcpath string destpath return boolean library fileutils keywords file transfer duplicate params 2,copyFile
+orders the elements in an array sequentially list t collection return list object library datautils keywords sort arrange list params 1,sortList
+copies a file from source to destination file sourcefile file targetfile return boolean library fileutils keywords copy transfer file params 2,copyFile
+tests digit membership inside a string string str return boolean library validationutils keywords digits validate numeric params 1,isNumeric
+splits a string by a given delimiter string input char separator return list string library stringutils keywords string separate split params 2,splitString
+copies a file from source to destination file sourcefile file targetfile return boolean library fileutils keywords transfer duplicate copy params 2,copyFile
+submits form or json data to a server string endpoint string jsonpayload return httpresponse library networkservice keywords http network request params 2,sendPostRequest
+calculates the sum of two integers integer x integer y return int library mathutils keywords add sum addition params 2,addNumbers
+makes the first character of the text uppercase string inputtext return string library stringutils keywords capitalize uppercase string params 1,capitalizeString
+returns the arithmetic mean of given items float values return float library mathutils keywords math mean average params 1,calculateAverage
+trashes the specified file string filepath return boolean library fileutils keywords remove file erase params 1,deleteFile
+computes the subtraction of b from a int num1 int num2 return int library mathutils keywords difference minus subtract params 2,subtractNumbers
+calculates string length string text return int library stringutils keywords string characters count params 1,countCharacters
+confirms telephone numbers digit constraints string phonenumber return boolean library validationutils keywords number check validate params 1,validatePhone
+identifies the highest number list int numbers return int library mathutils keywords max largest maximum params 1,findMaximum
+computes the subtraction of b from a int num1 int num2 return int library mathutils keywords difference minus subtract params 2,subtractNumbers
+confirms the web address formatting string webaddress return boolean library validationutils keywords url format link params 1,validateURL
+returns a divided by b float num1 float num2 return float library mathutils keywords fraction divide math params 2,divideNumbers
+arranges the list elements int array return list object library datautils keywords list order sort params 1,sortList
+identifies the lowest number int array return int library mathutils keywords min math smallest params 1,findMinimum
+divides the first number by the second float a float b return float library mathutils keywords fraction divide math params 2,divideNumbers
+outputs the given string to a file path string filepath string content return void library fileutils keywords file save io params 2,writeFile
+verifies whether an email contains valid characters and domain string email return boolean library validationutils keywords email format validate params 1,validateEmail
+joins an array of strings into one string items string delimiter return string library stringutils keywords merge join concat params 2,joinStrings
+arranges the list elements list object items return list object library datautils keywords list arrange sort params 1,sortList
+tokensizes the string using delimiter string input char separator return list string library stringutils keywords string split separate params 2,splitString
+finds the mean value from an array list int items return float library mathutils keywords mean statistics average params 1,calculateAverage
+calculates the difference between two values int minuend int subtrahend return int library mathutils keywords minus difference subtract params 2,subtractNumbers
+makes the first character of the text uppercase string text return string library stringutils keywords uppercase format string params 1,capitalizeString
+verifies whether an email contains valid characters and domain string email return boolean library validationutils keywords format check validate params 1,validateEmail
+returns string without leading or trailing spaces string text return string library stringutils keywords clean format whitespace params 1,trimWhitespace
+reads all content from a file file file return string library fileutils keywords io content read params 1,readFile
+totals the list values incrementally list float numbers return int library datautils keywords calculate list math params 1,calculateSum
+cleans up extra spaces at the beginning and end string input return string library stringutils keywords whitespace clean trim params 1,trimWhitespace
+finds the maximum value in a collection list float items return int library mathutils keywords largest math highest params 1,findMaximum
+finds the maximum value in a collection list float items return int library mathutils keywords math maximum highest params 1,findMaximum
+makes the first character of the text uppercase string text return string library stringutils keywords string capitalize format params 1,capitalizeString
+retrieves an http response securely string url return httpresponse library networkservice keywords request get network params 1,sendGetRequest
+executes a network get call string endpoint return httpresponse library networkservice keywords request http network params 1,sendGetRequest
+finds the minimum value in a collection int array return int library mathutils keywords minimum smallest min params 1,findMinimum
+transfers file permanently to another directory string oldpath string newpath return boolean library fileutils keywords relocate rename file params 2,moveFile
+uploads a local file to a server string filepath string url return boolean library networkservice keywords upload network transfer params 2,uploadFile
+joins an array of strings into one string items string delimiter return string library stringutils keywords concat string merge params 2,joinStrings
+returns the aggregate sum list int items return int library datautils keywords calculate total math params 1,calculateSum
+reverses a given string char chars return string library stringutils keywords invert reverse text params 1,reverseString
+removes duplicate values from a list list object items return list object library datautils keywords unique list duplicates params 1,removeDuplicates
+finds the minimum value in a collection int array return int library mathutils keywords smallest math lowest params 1,findMinimum
+finds how many characters are in a string string text return int library stringutils keywords length characters string params 1,countCharacters
+removes leading and trailing spaces from a string string input return string library stringutils keywords clean trim whitespace params 1,trimWhitespace
+creates a copy of the file at the new path string srcpath string destpath return boolean library fileutils keywords transfer copy file params 2,copyFile
+returns true if the string is parseable to number string input return boolean library validationutils keywords digits validate numeric params 1,isNumeric
+joins two collections sequentially int first int second return list object library datautils keywords join combine list params 2,mergeLists
+removes elements that do not match the predicate list object items predicate condition return list object library datautils keywords remove filter select params 2,filterList
+subtracts the second number from the first int num1 int num2 return int library mathutils keywords minus math subtract params 2,subtractNumbers
+fetches json data from an api string apiurl return jsonobject library networkservice keywords rest fetch api params 1,fetchApiData
+divides the first number by the second float num1 float num2 return float library mathutils keywords fraction math quotient params 2,divideNumbers
+checks if a file exists at the given path string path return boolean library fileutils keywords exists verify check params 1,fileExists
+copies a file from source to destination file sourcefile file targetfile return boolean library fileutils keywords duplicate copy transfer params 2,copyFile
+sorts given items in ascending order int array return list object library datautils keywords arrange list sort params 1,sortList
+ensures password has appropriate complexity string password return boolean library validationutils keywords validate security password params 1,validatePassword
+verifies numeric text representation string text return boolean library validationutils keywords digits validate numeric params 1,isNumeric
+retrieves a document from the internet string url string destination return boolean library networkservice keywords download fetch file params 2,downloadFile
+transfers file copy across directories string srcpath string destpath return boolean library fileutils keywords transfer copy file params 2,copyFile
+concatenates array sets into a single list list object list1 list object list2 return list object library datautils keywords list merge combine params 2,mergeLists
+clears a file from the disk file file return boolean library fileutils keywords file delete erase params 1,deleteFile
+converts the string to title case string inputtext return string library stringutils keywords string format capitalize params 1,capitalizeString
+gets the file contents as a string file file return string library fileutils keywords io read file params 1,readFile
+checks if a given string is a valid url string webaddress return boolean library validationutils keywords link validate url params 1,validateURL
+calculates the difference between two values int num1 int num2 return int library mathutils keywords math subtract minus params 2,subtractNumbers
+calculates the sum of two integers int first int second return int library mathutils keywords arithmetic add sum params 2,addNumbers
+returns the result of subtracting two integers int minuend int subtrahend return int library mathutils keywords math minus subtract params 2,subtractNumbers
+combines multiple arrays together list object list1 list object list2 return list object library datautils keywords join list merge params 2,mergeLists
+renames or moves a file path string source string destination return boolean library fileutils keywords move relocate file params 2,moveFile
+finds the maximum value in a collection list int numbers return int library mathutils keywords highest largest maximum params 1,findMaximum
+computes the multiplication of two integers int num1 int num2 return int library mathutils keywords product math multiply params 2,multiplyNumbers
+creates a copy of the file at the new path string srcpath string destpath return boolean library fileutils keywords copy transfer duplicate params 2,copyFile
+returns true if the string is parseable to number string val return boolean library validationutils keywords number validate digits params 1,isNumeric
+returns the characters of a string in reverse order string str return string library stringutils keywords reverse text invert params 1,reverseString
+strips whitespace characters string text return string library stringutils keywords whitespace format clean params 1,trimWhitespace
+counts the number of characters in a string string text return int library stringutils keywords length characters string params 1,countCharacters
+generates a file with provided content file file string text return void library fileutils keywords file write io params 2,writeFile
+finds the minimum value in a collection list int numbers return int library mathutils keywords math lowest minimum params 1,findMinimum
+ensures the string starts with a capital letter string text return string library stringutils keywords format capitalize uppercase params 1,capitalizeString
+loads text representation of a file file file return string library fileutils keywords file read io params 1,readFile
+breaks down a string into a list string input char separator return list string library stringutils keywords string separate delimiter params 2,splitString
+returns the aggregate sum double array return int library datautils keywords calculate total list params 1,calculateSum
+totals the list values incrementally double array return int library datautils keywords total sum math params 1,calculateSum
+writes text data to a file on disk string path string data return void library fileutils keywords write file io params 2,writeFile
+calculates x times y float x float y return int library mathutils keywords product multiply times params 2,multiplyNumbers
+combines multiple arrays together list t a list t b return list object library datautils keywords join merge list params 2,mergeLists
+returns the result of subtracting two integers int a int b return int library mathutils keywords difference subtract minus params 2,subtractNumbers
+strips out duplicated entries list object items return list object library datautils keywords duplicates unique clean params 1,removeDuplicates
+outputs the given string to a file path string filepath string content return void library fileutils keywords file save write params 2,writeFile
+sends an http post request with a payload string uri map data return httpresponse library networkservice keywords payload post request params 2,sendPostRequest
+returns a divided by b float num1 float num2 return float library mathutils keywords quotient divide math params 2,divideNumbers
+returns unique elements only from an array list object items return list object library datautils keywords unique list clean params 1,removeDuplicates
+checks if an email string is structurally sound string emailaddress return boolean library validationutils keywords check email format params 1,validateEmail
+computes the subtraction of b from a int a int b return int library mathutils keywords minus math difference params 2,subtractNumbers
+returns unique elements only from an array list t elements return list object library datautils keywords unique list duplicates params 1,removeDuplicates
+finds the minimum value in a collection list float items return int library mathutils keywords minimum smallest lowest params 1,findMinimum
+validates the format of an email address string targetemail return boolean library validationutils keywords email check validate params 1,validateEmail
+validates whether a generic file path is accessible string location return boolean library fileutils keywords verify file exists params 1,fileExists
+returns the result of subtracting two integers int a int b return int library mathutils keywords subtract difference minus params 2,subtractNumbers
+outputs the given string to a file path string filepath string content return void library fileutils keywords write io output params 2,writeFile
+returns the largest number in an array list int numbers return int library mathutils keywords math largest max params 1,findMaximum
+orders the elements in an array sequentially list t collection return list object library datautils keywords list arrange sort params 1,sortList
+calculates the quotient of two values float a float b return float library mathutils keywords quotient divide fraction params 2,divideNumbers
+concatenates elements of a list using a delimiter list string parts string separator return string library stringutils keywords join concat merge params 2,joinStrings
+transforms string to capitalized case string text return string library stringutils keywords string format capitalize params 1,capitalizeString
+removes a file given its path string targetpath return boolean library fileutils keywords file remove erase params 1,deleteFile
+combines multiple strings with a separator string items string delimiter return string library stringutils keywords join string merge params 2,joinStrings
+returns unique elements only from an array list object items return list object library datautils keywords list duplicates unique params 1,removeDuplicates
+retrieves a document from the internet string url string destination return boolean library networkservice keywords download file network params 2,downloadFile
+joins an array of strings into one list string parts string separator return string library stringutils keywords join concat string params 2,joinStrings
+transfers file permanently to another directory string oldpath string newpath return boolean library fileutils keywords move file relocate params 2,moveFile

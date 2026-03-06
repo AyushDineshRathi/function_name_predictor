@@ -2,34 +2,57 @@
 run_pipeline.py
 
 Main orchestrator for the Function Name Prediction ML pipeline.
-This scripts binds together data ingestion, preprocessing, training, and output.
+This script binds together data ingestion, preprocessing, training, and output.
 """
 
 import logging
+import os
+import sys
+
+# Ensure project modules can be loaded
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+from src.data.dataset_generator import generate_dataset
+from src.preprocessing.metadata_processor import prepare_dataset, save_processed_data
+from src.models.train_model import main as train_model_main
 
 def main():
+    # Setup logging
     logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
     logging.info("Starting Function Name Prediction pipeline...")
 
-    # TODO: Step 1 - Data ingestion
-    # raw_data = load_raw_metadata()
+    # Define paths
+    raw_data_dir = os.path.join("data", "raw")
+    raw_data_path = os.path.join(raw_data_dir, "functions_dataset.csv")
+    
+    processed_data_dir = os.path.join("data", "processed")
+    processed_data_path = os.path.join(processed_data_dir, "processed_dataset.csv")
 
-    # TODO: Step 2 - Preprocessing
-    # cleaned_texts = preprocess_data(raw_data)
+    try:
+        # Step 1: Generate dataset
+        logging.info("Step 1: Generating synthetic dataset...")
+        os.makedirs(raw_data_dir, exist_ok=True)
+        df_raw = generate_dataset(num_records=380)
+        df_raw.to_csv(raw_data_path, index=False)
+        logging.info(f"Dataset generated and saved to {raw_data_path}")
 
-    # TODO: Step 3 - Feature extraction (TF-IDF Vectorization)
-    # X, y = vectorize_features(cleaned_texts)
+        # Step 2: Preprocessing
+        logging.info("Step 2: Preprocessing metadata...")
+        os.makedirs(processed_data_dir, exist_ok=True)
+        df_processed = prepare_dataset(raw_data_path)
+        save_processed_data(df_processed, processed_data_path)
+        logging.info(f"Preprocessed dataset saved to {processed_data_path}")
 
-    # TODO: Step 4 - Train lightweight model (LR / Naive Bayes)
-    # model = train_model(X, y)
+        # Step 3, 4, 5, 6: Feature Extraction, Training, Evaluation, Saving Models
+        logging.info("Step 3-6: Training vectorizer and models...")
+        # train_model_main() naturally handles vectorization, training both models,
+        # evaluating them, printing metrics, picking the best one, and saving to disk.
+        train_model_main()
 
-    # TODO: Step 5 - Model Evaluation
-    # evaluate_model(model, X_test, y_test)
-
-    # TODO: Step 6 - Save model for later inference
-    # save_model(model, "models/function_predictor.joblib")
-
-    logging.info("Pipeline executed successfully. Note: Implementation details are yet to be added.")
+        logging.info("Pipeline executed successfully. All models and artifacts saved.")
+        
+    except Exception as e:
+        logging.error(f"Pipeline execution failed: {e}")
 
 if __name__ == "__main__":
     main()
