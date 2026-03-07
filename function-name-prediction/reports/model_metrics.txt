@@ -2,31 +2,31 @@ Model Evaluation Report
 =======================
 
 --- Logistic Regression ---
-Accuracy:  1.0000
-Precision: 1.0000
-Recall:    1.0000
-F1-score:  1.0000
+Accuracy:  0.9931
+Precision: 0.9948
+Recall:    0.9931
+F1-score:  0.9931
 Confusion Matrix:
-[[6 0 0 ... 0 0 0]
- [0 3 0 ... 0 0 0]
- [0 0 4 ... 0 0 0]
+[[1 0 0 ... 0 0 0]
+ [0 5 0 ... 0 0 0]
+ [0 0 6 ... 0 0 0]
  ...
- [0 0 0 ... 3 0 0]
- [0 0 0 ... 0 5 0]
- [0 0 0 ... 0 0 3]]
+ [0 0 0 ... 5 0 0]
+ [0 0 0 ... 0 4 0]
+ [0 0 0 ... 0 0 5]]
 
 --- Multinomial Naive Bayes ---
-Accuracy:  0.9653
-Precision: 0.9813
-Recall:    0.9653
-F1-score:  0.9663
+Accuracy:  0.9931
+Precision: 0.9948
+Recall:    0.9931
+F1-score:  0.9932
 Confusion Matrix:
-[[6 0 0 ... 0 0 0]
- [0 3 0 ... 0 0 0]
- [0 0 4 ... 0 0 0]
+[[1 0 0 ... 0 0 0]
+ [0 5 0 ... 0 0 0]
+ [0 0 6 ... 0 0 0]
  ...
- [0 0 0 ... 3 0 0]
- [0 0 0 ... 0 5 0]
- [0 0 0 ... 0 0 3]]
+ [0 0 0 ... 5 0 0]
+ [0 0 0 ... 0 4 0]
+ [0 0 0 ... 0 0 5]]
 
-Best model: Logistic Regression
+Best model: Multinomial Naive Bayes

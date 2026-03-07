@@ -8,3 +8,6 @@ function-name-prediction/src/api/__pycache__
 function-name-prediction/src/preprocessing/__pycache__
 function-name-prediction/models/function_model.pkl
 function-name-prediction/models/vectorizer.pkl
+function-name-prediction/data/raw/*
+function-name-prediction/data/processed/*
+function-name-prediction/reports/model_metrics.txt
