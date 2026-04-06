@@ -1,97 +1,106 @@
-from pathlib import Path
-import re
+import pickle
 import time
-import warnings
-import joblib
+from pathlib import Path
+from typing import Dict, List
+
+import numpy as np
+import tensorflow as tf
+
+from src.features.vectorizer import normalize_text, transform_text
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-MODEL_PATH = PROJECT_ROOT / "models" / "function_model.pkl"
-VECTORIZER_PATH = PROJECT_ROOT / "models" / "vectorizer.pkl"
+TFLITE_MODEL_PATH = PROJECT_ROOT / "models" / "function_model.tflite"
+H5_MODEL_PATH = PROJECT_ROOT / "models" / "function_model.h5"
+WORD_INDEX_PATH = PROJECT_ROOT / "models" / "word_index.pkl"
+OUTPUT_TOKENIZER_PATH = PROJECT_ROOT / "models" / "output_tokenizer.pkl"
 REPORTS_DIR = PROJECT_ROOT / "reports"
 INFERENCE_SPEED_REPORT_PATH = REPORTS_DIR / "inference_speed.txt"
 
-# Global variables to cache the model and vectorizer
-_model = None
-_vectorizer = None
+PAD_TOKEN = "<PAD>"
+UNK_TOKEN = "<UNK>"
+
+_interpreter = None
+_input_details = None
+_output_details = None
+_keras_model = None
+_word_index = None
+_output_tokenizer = None
+
+
+def to_camel_case(words: List[str]) -> str:
+    if not words:
+        return ""
+    return words[0] + "".join(w.capitalize() for w in words[1:])
+
 
 def resources_loaded() -> bool:
-    return _model is not None and _vectorizer is not None
+    return _word_index is not None and _output_tokenizer is not None and (_interpreter is not None or _keras_model is not None)
 
-def _load_pickle_with_version_check(file_path: Path, artifact_name: str):
-    with warnings.catch_warnings(record=True) as caught:
-        warnings.simplefilter("always")
-        loaded = joblib.load(file_path)
 
-    version_warnings = [w for w in caught if w.category.__name__ == "InconsistentVersionWarning"]
-    if version_warnings:
-        raise RuntimeError(
-            f"{artifact_name} is incompatible with current scikit-learn version. "
-            "Please run: python run_pipeline.py"
-        )
-    return loaded
+def load_resources():
+    global _interpreter, _input_details, _output_details, _keras_model, _word_index, _output_tokenizer
 
-def normalize_text(text: str) -> str:
-    if text is None:
-        return ""
-    normalized = str(text).lower()
-    normalized = re.sub(r"[^\w\s]", " ", normalized)
-    normalized = re.sub(r"\s+", " ", normalized).strip()
-    return normalized
+    if resources_loaded():
+        return
 
-def load_resources(model_path=None, vectorizer_path=None):
-    """
-    Loads the trained model and vectorizer from disk.
-    Cached after the first call to avoid reloading on subsequent predictions.
-    """
-    global _model, _vectorizer
-    
-    if model_path is None:
-        model_path = MODEL_PATH
-    if vectorizer_path is None:
-        vectorizer_path = VECTORIZER_PATH
+    if not WORD_INDEX_PATH.exists() or not OUTPUT_TOKENIZER_PATH.exists():
+        raise FileNotFoundError("Tokenizer artifacts not found. Please run: python run_pipeline.py")
 
-    model_file = Path(model_path)
-    vectorizer_file = Path(vectorizer_path)
-        
-    if _model is None:
-        if not model_file.exists():
-            raise FileNotFoundError("Models not found. Please run: python run_pipeline.py")
-        _model = _load_pickle_with_version_check(model_file, "Model file")
-        
-    if _vectorizer is None:
-        if not vectorizer_file.exists():
-            raise FileNotFoundError("Models not found. Please run: python run_pipeline.py")
-        _vectorizer = _load_pickle_with_version_check(vectorizer_file, "Vectorizer file")
+    with WORD_INDEX_PATH.open("rb") as f:
+        _word_index = pickle.load(f)
+    with OUTPUT_TOKENIZER_PATH.open("rb") as f:
+        _output_tokenizer = pickle.load(f)
+
+    if TFLITE_MODEL_PATH.exists():
+        _interpreter = tf.lite.Interpreter(model_path=str(TFLITE_MODEL_PATH))
+        _interpreter.allocate_tensors()
+        _input_details = _interpreter.get_input_details()
+        _output_details = _interpreter.get_output_details()
+    elif H5_MODEL_PATH.exists():
+        _keras_model = tf.keras.models.load_model(H5_MODEL_PATH)
+    else:
+        raise FileNotFoundError("Model file not found. Please run: python run_pipeline.py")
+
+
+def decode_tokens(token_ids: List[int], output_index_word: Dict[int, str]) -> List[str]:
+    words = []
+    for idx in token_ids:
+        token = output_index_word.get(int(idx), UNK_TOKEN)
+        if token in {PAD_TOKEN, UNK_TOKEN}:
+            continue
+        words.append(token)
+    return words
+
+
+def run_inference(input_ids: np.ndarray) -> np.ndarray:
+    if _interpreter is not None:
+        input_dtype = _input_details[0]["dtype"]
+        model_input = input_ids.astype(input_dtype, copy=False)
+        _interpreter.set_tensor(_input_details[0]["index"], model_input)
+        _interpreter.invoke()
+        return _interpreter.get_tensor(_output_details[0]["index"])
+
+    return _keras_model.predict(input_ids, verbose=0)
+
 
 def predict_function(metadata_text: str) -> str:
-    """
-    Transforms the input metadata text and returns the predicted function name.
-    
-    Args:
-        metadata_text (str): The combined and processed metadata string.
-        
-    Returns:
-        str: The predicted function name.
-    """
-    # Ensure models are loaded
     load_resources()
 
     normalized_text = normalize_text(metadata_text)
-    
-    # 1. Transform input metadata text using vectorizer
-    # The vectorizer expects an iterable of strings
-    transformed_text = _vectorizer.transform([normalized_text])
-    
-    # 2. Run model prediction
-    prediction = _model.predict(transformed_text)
-    
-    # 3. Return predicted function name
-    return prediction[0]
+    max_input_len = int(_output_tokenizer["max_input_len"])
+    input_seq = transform_text([normalized_text], _word_index, max_input_len)
 
-def benchmark_inference(sample_text: str) -> tuple:
-    # Warm-up call to avoid counting one-time model/vectorizer load time.
+    probs = run_inference(input_seq)
+    pred_ids = np.argmax(probs, axis=-1)[0].tolist()
+
+    output_index_word = _output_tokenizer["output_index_word"]
+    words = decode_tokens(pred_ids, output_index_word)
+    predicted_name = to_camel_case(words)
+    return predicted_name if predicted_name else "unknownFunction"
+
+
+def benchmark_inference(sample_text: str):
     _ = predict_function(sample_text)
-
     start = time.perf_counter()
     prediction = predict_function(sample_text)
     elapsed_ms = (time.perf_counter() - start) * 1000.0
@@ -107,22 +116,14 @@ def benchmark_inference(sample_text: str) -> tuple:
     INFERENCE_SPEED_REPORT_PATH.write_text(report_content, encoding="utf-8")
     return prediction, elapsed_ms
 
+
 if __name__ == "__main__":
-    import sys
-    
-    # Ensure standard paths resolve correctly inside the script too
-    sys.path.append(str(PROJECT_ROOT))
-    
-    print("\n--- Function Name Predictor (Inference Demonstration) ---")
-    
-    # Example input used for lightweight benchmark
+    print("\n--- Function Name Predictor (TFLite Inference) ---")
     example_input = "Adds two integers int a int b return int keywords add sum"
     print(f"\nInput Metadata: \"{example_input}\"")
-    
     try:
         predicted_name, latency_ms = benchmark_inference(example_input)
-        print("Expected output example:")
-        print(f"Predicted Function: {predicted_name}\n")
+        print(f"Predicted Function: {predicted_name}")
         print(f"Inference latency: {latency_ms:.4f} ms")
         print(f"Speed report saved to: {INFERENCE_SPEED_REPORT_PATH}")
     except (FileNotFoundError, RuntimeError) as e:

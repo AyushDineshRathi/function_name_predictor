@@ -1,4 +1,5 @@
 venv
+function-name-prediction/__pycache__
 function-name-prediction/src/features/__pycache__
 function-name-prediction/src/models/__pycache__
 function-name-prediction/src/inference/__pycache__

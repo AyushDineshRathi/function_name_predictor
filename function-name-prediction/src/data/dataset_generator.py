@@ -514,9 +514,6 @@ FUNCTION_TEMPLATES = {
 def generate_dataset(num_records=720):
     data = []
     
-    # We want roughly an equal spread across all 34 functions.
-    # 400 / 34 ≈ 12 records per function.
-    
     # Flatten functions for easy looping
     flat_functions = []
     for library, funcs in FUNCTION_TEMPLATES.items():
