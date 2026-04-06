@@ -1,4 +1,5 @@
 Model Size Report
 =================
-function_model.pkl : 113.46 KB
-vectorizer.pkl : 15.31 KB
+function_model.h5 : 2418.13 KB
+embedding_matrix.npy : 174.34 KB
+output_tokenizer.pkl : 0.92 KB

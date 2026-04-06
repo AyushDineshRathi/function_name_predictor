@@ -15,10 +15,12 @@ def convert_model_to_tflite(
     if not h5_model_path.exists():
         raise FileNotFoundError(f"Keras model not found at {h5_model_path}. Train the model first.")
 
-    model = tf.keras.models.load_model(h5_model_path)
+    model = tf.keras.models.load_model(h5_model_path, compile=False)
     converter = tf.lite.TFLiteConverter.from_keras_model(model)
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
     converter.target_spec.supported_types = [tf.float16]
+    converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+    converter._experimental_lower_tensor_list_ops = False
 
     tflite_model = converter.convert()
     tflite_model_path.parent.mkdir(parents=True, exist_ok=True)

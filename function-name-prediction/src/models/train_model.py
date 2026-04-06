@@ -79,7 +79,7 @@ def build_bigru_model(
         output_dim=embedding_dim,
         weights=[embedding_matrix],
         trainable=True,
-        mask_zero=True,
+        mask_zero=False,
         name="embedding",
     )(inputs)
     x = tf.keras.layers.Bidirectional(

@@ -12,3 +12,4 @@ function-name-prediction/models/vectorizer.pkl
 function-name-prediction/data/raw/*
 function-name-prediction/data/processed/*
 function-name-prediction/reports/model_metrics.txt
+function-name-prediction/models

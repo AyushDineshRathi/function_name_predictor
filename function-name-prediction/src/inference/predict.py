@@ -6,6 +6,7 @@ from typing import Dict, List
 import numpy as np
 import tensorflow as tf
 
+from tensorflow.keras.layers import Layer
 from src.features.vectorizer import normalize_text, transform_text
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -52,12 +53,48 @@ def load_resources():
         _output_tokenizer = pickle.load(f)
 
     if TFLITE_MODEL_PATH.exists():
-        _interpreter = tf.lite.Interpreter(model_path=str(TFLITE_MODEL_PATH))
-        _interpreter.allocate_tensors()
-        _input_details = _interpreter.get_input_details()
-        _output_details = _interpreter.get_output_details()
+        try:
+            _interpreter = tf.lite.Interpreter(model_path=str(TFLITE_MODEL_PATH))
+            _interpreter.allocate_tensors()
+            _input_details = _interpreter.get_input_details()
+            _output_details = _interpreter.get_output_details()
+        except Exception:
+            # Fallback to Keras model when TFLite model requires unsupported runtime ops.
+            _interpreter = None
+            if H5_MODEL_PATH.exists():
+                _keras_model = tf.keras.models.load_model(H5_MODEL_PATH, compile=False)
+            else:
+                raise
     elif H5_MODEL_PATH.exists():
-        _keras_model = tf.keras.models.load_model(H5_MODEL_PATH)
+        # Some H5 models may reference a custom serialized layer named 'NotEqual'.
+        # Provide a minimal compatible implementation so Keras can deserialize it.
+        class NotEqual(Layer):
+            def __init__(self, **kwargs):
+                super().__init__(**kwargs)
+
+            def __call__(self, *args, **kwargs):
+                new_args = []
+                for a in args:
+                    if tf.is_tensor(a):
+                        new_args.append(a)
+                    else:
+                        try:
+                            new_args.append(tf.convert_to_tensor(a))
+                        except Exception:
+                            new_args.append(a)
+                return super().__call__(*new_args, **kwargs)
+
+            def call(self, inputs):
+                if isinstance(inputs, (list, tuple)) and len(inputs) == 2:
+                    a, b = inputs
+                else:
+                    raise ValueError("NotEqual layer expects a list/tuple of two tensors")
+                return tf.not_equal(a, b)
+
+            def get_config(self):
+                return super().get_config()
+
+        _keras_model = tf.keras.models.load_model(H5_MODEL_PATH, custom_objects={"NotEqual": NotEqual})
     else:
         raise FileNotFoundError("Model file not found. Please run: python run_pipeline.py")
 
