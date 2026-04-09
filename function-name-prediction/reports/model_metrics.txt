@@ -1,32 +1,33 @@
 Model Evaluation Report
 =======================
 
---- Logistic Regression ---
+--- Linear SVM ---
 Accuracy:  0.9931
-Precision: 0.9948
+Precision: 0.9944
 Recall:    0.9931
-F1-score:  0.9931
+F1-score:  0.9929
 Confusion Matrix:
-[[1 0 0 ... 0 0 0]
- [0 5 0 ... 0 0 0]
- [0 0 6 ... 0 0 0]
+[[4 0 0 ... 0 0 0]
+ [0 4 0 ... 0 0 0]
+ [0 0 4 ... 0 0 0]
  ...
- [0 0 0 ... 5 0 0]
+ [0 0 0 ... 4 0 0]
  [0 0 0 ... 0 4 0]
- [0 0 0 ... 0 0 5]]
+ [0 0 0 ... 0 0 4]]
 
 --- Multinomial Naive Bayes ---
 Accuracy:  0.9931
-Precision: 0.9948
+Precision: 0.9944
 Recall:    0.9931
-F1-score:  0.9932
+F1-score:  0.9929
 Confusion Matrix:
-[[1 0 0 ... 0 0 0]
- [0 5 0 ... 0 0 0]
- [0 0 6 ... 0 0 0]
+[[4 0 0 ... 0 0 0]
+ [0 4 0 ... 0 0 0]
+ [0 0 4 ... 0 0 0]
  ...
- [0 0 0 ... 5 0 0]
+ [0 0 0 ... 4 0 0]
  [0 0 0 ... 0 4 0]
- [0 0 0 ... 0 0 5]]
+ [0 0 0 ... 0 0 4]]
 
-Best model: Multinomial Naive Bayes
+Best model: Linear SVM
+Best model metrics: Accuracy=0.9931, Precision=0.9944, Recall=0.9931, F1=0.9929

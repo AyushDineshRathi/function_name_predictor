@@ -34,7 +34,7 @@ def main():
         # Step 1: Generate dataset
         logging.info("Step 1: Generating synthetic dataset...")
         raw_data_dir.mkdir(parents=True, exist_ok=True)
-        df_raw = generate_dataset(num_records=720)
+        df_raw = generate_dataset(num_records=720, random_state=42)
         df_raw.to_csv(raw_data_path, index=False)
         logging.info(f"Dataset generated and saved to {raw_data_path}")
 

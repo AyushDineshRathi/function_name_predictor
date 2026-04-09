@@ -3,13 +3,14 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from typing import List
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 # Add the project root to sys.path so we can import src modules
 sys.path.append(str(PROJECT_ROOT))
 
-from src.inference.predict import predict_function, load_resources, resources_loaded
+from src.inference.predict import predict_with_confidence, load_resources, resources_loaded
 
 # Define the request body schema
 class PredictRequest(BaseModel):
@@ -18,6 +19,10 @@ class PredictRequest(BaseModel):
 # Define the response schema
 class PredictResponse(BaseModel):
     predicted_function: str
+    best_label: str
+    best_confidence: float
+    threshold: float
+    top_predictions: List[dict]
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
@@ -45,10 +50,10 @@ async def predict(request: PredictRequest):
             raise HTTPException(status_code=400, detail="Metadata string cannot be empty.")
             
         # Run prediction
-        predicted_name = predict_function(request.metadata)
+        prediction = predict_with_confidence(request.metadata, top_k=3)
         
         # Return result
-        return PredictResponse(predicted_function=predicted_name)
+        return PredictResponse(**prediction)
     except HTTPException:
         raise
     except FileNotFoundError:

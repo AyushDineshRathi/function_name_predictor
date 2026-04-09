@@ -1,4 +1,4 @@
 Model Size Report
 =================
-function_model.pkl : 226.01 KB
-vectorizer.pkl : 15.17 KB
+function_model.pkl : 827.05 KB
+vectorizer.pkl : 189.35 KB

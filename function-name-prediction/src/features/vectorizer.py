@@ -11,7 +11,12 @@ _vectorizer = None
 def get_vectorizer():
     global _vectorizer
     if _vectorizer is None:
-        _vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
+        _vectorizer = TfidfVectorizer(
+            ngram_range=(1, 3),
+            max_features=10000,
+            min_df=2,
+            stop_words='english',
+        )
     return _vectorizer
 
 def set_vectorizer(vectorizer):
