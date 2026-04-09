@@ -2,13 +2,15 @@ import pandas as pd
 from pathlib import Path
 from src.preprocessing.text_normalizer import build_structured_metadata
 
+import pandas as pd
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 def prepare_dataset(path: str) -> pd.DataFrame:
     """
-    Loads raw dataset, cleans text fields, and combines metadata into a single text feature.
-    
-    Outputs a DataFrame with columns: ['combined_metadata', 'function_name']
+    Load raw data and output DataFrame with required columns:
+    - input_text
+    - function_name
     """
     input_path = Path(path)
     print(f"Loading raw dataset from {input_path}...")
@@ -31,34 +33,42 @@ def prepare_dataset(path: str) -> pd.DataFrame:
     # Keep only the necessary columns
     result_df = df[['combined_metadata', 'function_name']]
     print("Dataset preparation complete.")
-    
     return result_df
 
-def save_processed_data(df: pd.DataFrame, output_path: str):
-    """
-    Saves the processed dataset to the specified path.
-    """
-    # Ensure directory exists
+
+def save_processed_data(df: pd.DataFrame, output_path: str) -> None:
+    """Save processed dataset to disk."""
     output_file = Path(output_path)
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    
     print(f"Saving processed dataset to {output_file}...")
     df.to_csv(output_file, index=False)
     print("Save complete.")
 
+
+def parse_args() -> argparse.Namespace:
+    """Parse command-line arguments for input/output CSV paths."""
+    default_raw = PROJECT_ROOT / "data" / "raw" / "function_dataset.csv"
+    fallback_raw = PROJECT_ROOT / "data" / "raw" / "functions_dataset.csv"
+    default_input = default_raw if default_raw.exists() else fallback_raw
+    default_output = PROJECT_ROOT / "data" / "processed" / "processed_dataset.csv"
+
+    parser = argparse.ArgumentParser(description="Preprocess function metadata for NLP training.")
+    parser.add_argument("--input", type=str, default=str(default_input), help="Path to input CSV file.")
+    parser.add_argument("--output", type=str, default=str(default_output), help="Path to output CSV file.")
+    return parser.parse_args()
+
+
+def main() -> None:
+    """Run metadata preprocessing end-to-end."""
+    args = parse_args()
+    processed_df = prepare_dataset(args.input)
+    save_processed_data(processed_df, args.output)
+
+    if not processed_df.empty:
+        print("\nExample output row:")
+        print(processed_df.iloc[0]["input_text"])
+        print(f"-> {processed_df.iloc[0]['function_name']}")
+
+
 if __name__ == "__main__":
-    # For testing the module directly
-    raw_path = PROJECT_ROOT / "data" / "raw" / "functions_dataset.csv"
-    processed_path = PROJECT_ROOT / "data" / "processed" / "processed_dataset.csv"
-    
-    if raw_path.exists():
-        processed_df = prepare_dataset(raw_path)
-        
-        # Display an example of the combined text
-        print("\nExample combined metadata:")
-        print(processed_df['combined_metadata'].iloc[0])
-        print(f"-> Target: {processed_df['function_name'].iloc[0]}\n")
-        
-        save_processed_data(processed_df, processed_path)
-    else:
-        print(f"Error: Raw dataset not found at {raw_path}")
+    main()
