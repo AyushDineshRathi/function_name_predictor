@@ -74,4 +74,4 @@ if __name__ == "__main__":
     import uvicorn
     print("Starting API with uvicorn...")
     print("Open API docs at: http://127.0.0.1:8000/docs")
-    uvicorn.run("src.api.app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("src.api.app:app", host="0.0.0.0", port=8000, reload=False)

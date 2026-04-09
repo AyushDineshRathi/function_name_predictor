@@ -49,9 +49,8 @@ OBJECT_PHRASE_MAP = [
     ("yoga", "Yoga"),
 ]
 
-# Global variables to cache the model and vectorizer
-_model = None
-_vectorizer = None
+PAD_TOKEN = "<PAD>"
+UNK_TOKEN = "<UNK>"
 
 def resources_loaded() -> bool:
     return _model is not None and _vectorizer is not None
@@ -260,6 +259,14 @@ def benchmark_inference(sample_text: str) -> tuple:
     # Warm-up call to avoid counting one-time model/vectorizer load time.
     _ = predict_with_confidence(sample_text)
 
+    output_index_word = _output_tokenizer["output_index_word"]
+    words = decode_tokens(pred_ids, output_index_word)
+    predicted_name = to_camel_case(words)
+    return predicted_name if predicted_name else "unknownFunction"
+
+
+def benchmark_inference(sample_text: str):
+    _ = predict_function(sample_text)
     start = time.perf_counter()
     result = predict_with_confidence(sample_text)
     elapsed_ms = (time.perf_counter() - start) * 1000.0
@@ -277,22 +284,14 @@ def benchmark_inference(sample_text: str) -> tuple:
     INFERENCE_SPEED_REPORT_PATH.write_text(report_content, encoding="utf-8")
     return result["predicted_function"], elapsed_ms
 
+
 if __name__ == "__main__":
-    import sys
-    
-    # Ensure standard paths resolve correctly inside the script too
-    sys.path.append(str(PROJECT_ROOT))
-    
-    print("\n--- Function Name Predictor (Inference Demonstration) ---")
-    
-    # Example input used for lightweight benchmark
+    print("\n--- Function Name Predictor (TFLite Inference) ---")
     example_input = "Adds two integers int a int b return int keywords add sum"
     print(f"\nInput Metadata: \"{example_input}\"")
-    
     try:
         predicted_name, latency_ms = benchmark_inference(example_input)
-        print("Expected output example:")
-        print(f"Predicted Function: {predicted_name}\n")
+        print(f"Predicted Function: {predicted_name}")
         print(f"Inference latency: {latency_ms:.4f} ms")
         print(f"Speed report saved to: {INFERENCE_SPEED_REPORT_PATH}")
     except (FileNotFoundError, RuntimeError) as e:
