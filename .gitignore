@@ -1,13 +1,35 @@
-venv
-function-name-prediction/src/features/__pycache__
-function-name-prediction/src/models/__pycache__
-function-name-prediction/src/inference/__pycache__
-function-name-prediction/src/data/__pycache__
-function-name-prediction/src/__pycache__
-function-name-prediction/src/api/__pycache__
-function-name-prediction/src/preprocessing/__pycache__
-function-name-prediction/models/function_model.pkl
-function-name-prediction/models/vectorizer.pkl
-function-name-prediction/data/raw/*
-function-name-prediction/data/processed/*
-function-name-prediction/reports/model_metrics.txt
+# Virtual environments
+venv/
+function-name-prediction/venv/
+.venv/
+
+# Python cache/artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Trained artifacts (generated)
+function-name-prediction/models/*.pkl
+function-name-prediction/models/artifacts_manifest.json
+
+# Generated datasets/reports (keep source samples under raw/)
+function-name-prediction/data/raw/functions_dataset.csv
+function-name-prediction/data/processed/processed_dataset.csv
+function-name-prediction/data/processed/improved_functions_1.csv
+function-name-prediction/reports/*.txt
+
+# Keep placeholder files
+!function-name-prediction/data/raw/.gitkeep
+!function-name-prediction/data/processed/.gitkeep
