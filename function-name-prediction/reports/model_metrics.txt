@@ -1,5 +1,5 @@
-Training Report
-=================================
+Model Evaluation Report
+=======================
 
 --- Linear SVM ---
 Accuracy:  0.9931

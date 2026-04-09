@@ -49,8 +49,10 @@ OBJECT_PHRASE_MAP = [
     ("yoga", "Yoga"),
 ]
 
-PAD_TOKEN = "<PAD>"
-UNK_TOKEN = "<UNK>"
+# Cached artifacts loaded once per process.
+_model = None
+_vectorizer = None
+
 
 def resources_loaded() -> bool:
     return _model is not None and _vectorizer is not None
@@ -123,6 +125,7 @@ def _load_pickle_with_version_check(file_path: Path, artifact_name: str):
         )
     return loaded
 
+
 def normalize_text(text: str) -> str:
     return build_structured_metadata_from_text(text)
 
@@ -133,8 +136,7 @@ def _to_pascal_case(text: str) -> str:
 
 
 def _extract_action(raw_text: str) -> str:
-    tokens = raw_text.lower().split()
-    for token in tokens:
+    for token in raw_text.lower().split():
         mapped = ACTION_MAP.get(token)
         if mapped:
             return mapped
@@ -147,12 +149,25 @@ def _extract_object(raw_text: str) -> str:
         if phrase in text:
             return normalized
 
-    # Lightweight fallback noun-like extraction.
     cleaned = "".join(ch.lower() if ch.isalnum() or ch.isspace() else " " for ch in raw_text)
     tokens = [t for t in cleaned.split() if t]
     blocked = set(ACTION_MAP.keys()) | {
-        "a", "an", "the", "to", "from", "of", "for", "and", "or", "with",
-        "recording", "real", "time", "data", "workout", "session"
+        "a",
+        "an",
+        "the",
+        "to",
+        "from",
+        "of",
+        "for",
+        "and",
+        "or",
+        "with",
+        "recording",
+        "real",
+        "time",
+        "data",
+        "workout",
+        "session",
     }
     candidates = [t for t in tokens if t not in blocked and len(t) > 2]
     if not candidates:
@@ -166,21 +181,13 @@ def generate_rule_based_function_name(metadata_text: str) -> str:
     obj = _extract_object(raw_text)
     return f"{action}{obj}"
 
-def load_resources(model_path=None, vectorizer_path=None):
-    """
-    Loads the trained model and vectorizer from disk.
-    Cached after the first call to avoid reloading on subsequent predictions.
-    """
-    global _model, _vectorizer
-    
-    if model_path is None:
-        model_path = MODEL_PATH
-    if vectorizer_path is None:
-        vectorizer_path = VECTORIZER_PATH
 
-    model_file = Path(model_path)
-    vectorizer_file = Path(vectorizer_path)
-        
+def load_resources(model_path=None, vectorizer_path=None):
+    global _model, _vectorizer
+
+    model_file = Path(model_path) if model_path is not None else MODEL_PATH
+    vectorizer_file = Path(vectorizer_path) if vectorizer_path is not None else VECTORIZER_PATH
+
     if not model_file.exists() or not vectorizer_file.exists():
         raise FileNotFoundError("Models not found. Please run: python run_pipeline.py")
 
@@ -195,15 +202,8 @@ def load_resources(model_path=None, vectorizer_path=None):
         _model = loaded_model
         _vectorizer = loaded_vectorizer
 
-def predict_function(metadata_text: str) -> str:
-    result = predict_with_confidence(metadata_text, top_k=3, threshold=DEFAULT_CONFIDENCE_THRESHOLD)
-    return result["predicted_function"]
-
 
 def predict_with_confidence(metadata_text: str, top_k: int = 3, threshold: float = DEFAULT_CONFIDENCE_THRESHOLD) -> dict:
-    """
-    Returns top-k predictions with confidence scores and a thresholded primary prediction.
-    """
     load_resources()
     normalized_text = normalize_text(metadata_text)
     transformed_text = _vectorizer.transform([normalized_text])
@@ -211,37 +211,29 @@ def predict_with_confidence(metadata_text: str, top_k: int = 3, threshold: float
     if hasattr(_model, "predict_proba"):
         proba = _model.predict_proba(transformed_text)[0]
     elif hasattr(_model, "decision_function"):
-        scores = _model.decision_function(transformed_text)
-        scores = np.asarray(scores)
+        scores = np.asarray(_model.decision_function(transformed_text))
         if scores.ndim == 1:
-            # Binary classification path
             pos = scores[0]
             scores = np.array([-pos, pos], dtype=float)
         else:
-            # Multiclass path
-            scores = scores[0]
+            scores = scores[0].astype(float)
 
-        # Convert decision scores to normalized confidence-like values.
-        scores = scores.astype(float)
         max_score = np.max(scores)
         exp_scores = np.exp(scores - max_score)
         denom = np.sum(exp_scores)
         proba = exp_scores / denom if denom > 0 else np.ones_like(exp_scores) / len(exp_scores)
     else:
         raise RuntimeError("Loaded model does not support confidence scoring (missing predict_proba/decision_function).")
-    classes = np.asarray(_model.classes_)
 
+    classes = np.asarray(_model.classes_)
     k = max(1, min(top_k, len(proba)))
     top_idx_unsorted = np.argpartition(proba, -k)[-k:]
     top_idx = top_idx_unsorted[np.argsort(proba[top_idx_unsorted])[::-1]]
 
-    top_predictions = [
-        {"label": str(classes[i]), "confidence": float(proba[i])}
-        for i in top_idx
-    ]
-
+    top_predictions = [{"label": str(classes[i]), "confidence": float(proba[i])} for i in top_idx]
     best_label = top_predictions[0]["label"]
     best_confidence = top_predictions[0]["confidence"]
+
     if best_confidence >= threshold:
         predicted_function = best_label
     else:
@@ -255,18 +247,13 @@ def predict_with_confidence(metadata_text: str, top_k: int = 3, threshold: float
         "top_predictions": top_predictions,
     }
 
-def benchmark_inference(sample_text: str) -> tuple:
-    # Warm-up call to avoid counting one-time model/vectorizer load time.
-    _ = predict_with_confidence(sample_text)
 
-    output_index_word = _output_tokenizer["output_index_word"]
-    words = decode_tokens(pred_ids, output_index_word)
-    predicted_name = to_camel_case(words)
-    return predicted_name if predicted_name else "unknownFunction"
+def predict_function(metadata_text: str) -> str:
+    return predict_with_confidence(metadata_text, top_k=3, threshold=DEFAULT_CONFIDENCE_THRESHOLD)["predicted_function"]
 
 
 def benchmark_inference(sample_text: str):
-    _ = predict_function(sample_text)
+    _ = predict_with_confidence(sample_text)
     start = time.perf_counter()
     result = predict_with_confidence(sample_text)
     elapsed_ms = (time.perf_counter() - start) * 1000.0
@@ -286,7 +273,7 @@ def benchmark_inference(sample_text: str):
 
 
 if __name__ == "__main__":
-    print("\n--- Function Name Predictor (TFLite Inference) ---")
+    print("\n--- Function Name Predictor (Inference Demonstration) ---")
     example_input = "Adds two integers int a int b return int keywords add sum"
     print(f"\nInput Metadata: \"{example_input}\"")
     try:

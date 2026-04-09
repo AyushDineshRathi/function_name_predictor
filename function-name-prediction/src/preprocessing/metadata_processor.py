@@ -1,8 +1,7 @@
+import argparse
 import pandas as pd
 from pathlib import Path
 from src.preprocessing.text_normalizer import build_structured_metadata
-
-import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -47,9 +46,7 @@ def save_processed_data(df: pd.DataFrame, output_path: str) -> None:
 
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments for input/output CSV paths."""
-    default_raw = PROJECT_ROOT / "data" / "raw" / "function_dataset.csv"
-    fallback_raw = PROJECT_ROOT / "data" / "raw" / "functions_dataset.csv"
-    default_input = default_raw if default_raw.exists() else fallback_raw
+    default_input = PROJECT_ROOT / "data" / "raw" / "functions_dataset.csv"
     default_output = PROJECT_ROOT / "data" / "processed" / "processed_dataset.csv"
 
     parser = argparse.ArgumentParser(description="Preprocess function metadata for NLP training.")
@@ -66,7 +63,7 @@ def main() -> None:
 
     if not processed_df.empty:
         print("\nExample output row:")
-        print(processed_df.iloc[0]["input_text"])
+        print(processed_df.iloc[0]["combined_metadata"])
         print(f"-> {processed_df.iloc[0]['function_name']}")
 
 
