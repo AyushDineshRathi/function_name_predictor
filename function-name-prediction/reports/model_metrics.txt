@@ -1,13 +1,33 @@
-BiGRU (TensorFlow) Training Report
+Training Report
 =================================
 
-Epoch 1: loss=3.0788, val_loss=1.8923, token_acc=0.4614, val_token_acc=0.5243
-Epoch 2: loss=1.8493, val_loss=1.7849, token_acc=0.5243, val_token_acc=0.5486
-Epoch 3: loss=1.7839, val_loss=1.7264, token_acc=0.5165, val_token_acc=0.5208
-Epoch 4: loss=1.7143, val_loss=1.6598, token_acc=0.5443, val_token_acc=0.5642
-Epoch 5: loss=1.5982, val_loss=1.5043, token_acc=0.5725, val_token_acc=0.5660
-Epoch 6: loss=1.3987, val_loss=1.2681, token_acc=0.6128, val_token_acc=0.6597
-Epoch 7: loss=1.1743, val_loss=1.0702, token_acc=0.6740, val_token_acc=0.6806
-Epoch 8: loss=0.9981, val_loss=0.9086, token_acc=0.6879, val_token_acc=0.7066
+--- Linear SVM ---
+Accuracy:  0.9931
+Precision: 0.9944
+Recall:    0.9931
+F1-score:  0.9929
+Confusion Matrix:
+[[4 0 0 ... 0 0 0]
+ [0 4 0 ... 0 0 0]
+ [0 0 4 ... 0 0 0]
+ ...
+ [0 0 0 ... 4 0 0]
+ [0 0 0 ... 0 4 0]
+ [0 0 0 ... 0 0 4]]
 
-Final test exact-match accuracy: 0.0972
+--- Multinomial Naive Bayes ---
+Accuracy:  0.9931
+Precision: 0.9944
+Recall:    0.9931
+F1-score:  0.9929
+Confusion Matrix:
+[[4 0 0 ... 0 0 0]
+ [0 4 0 ... 0 0 0]
+ [0 0 4 ... 0 0 0]
+ ...
+ [0 0 0 ... 4 0 0]
+ [0 0 0 ... 0 4 0]
+ [0 0 0 ... 0 0 4]]
+
+Best model: Linear SVM
+Best model metrics: Accuracy=0.9931, Precision=0.9944, Recall=0.9931, F1=0.9929

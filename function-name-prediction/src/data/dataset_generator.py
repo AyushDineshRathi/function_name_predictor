@@ -511,7 +511,8 @@ FUNCTION_TEMPLATES = {
     ]
 }
 
-def generate_dataset(num_records=720):
+def generate_dataset(num_records=720, random_state=42):
+    rng = random.Random(random_state)
     data = []
     
     # Flatten functions for easy looping
@@ -535,9 +536,9 @@ def generate_dataset(num_records=720):
         ret_type = func['return_type']
         
         for _ in range(records_count[idx]):
-            params = random.choice(func['parameters'])
-            desc = random.choice(_build_description_variants(func, random.choice(func['descriptions']), params))
-            kw = ", ".join(random.sample(func['keywords'], k=min(3, len(func['keywords']))))
+            params = rng.choice(func['parameters'])
+            desc = rng.choice(_build_description_variants(func, rng.choice(func['descriptions']), params))
+            kw = ", ".join(rng.sample(func['keywords'], k=min(3, len(func['keywords']))))
             
             # calculate param count
             p_count = _count_params(params)
@@ -554,14 +555,16 @@ def generate_dataset(num_records=720):
             data.append(row)
             
     # Shuffle the dataset
-    random.shuffle(data)
+    rng.shuffle(data)
     
     df = pd.DataFrame(data)
+    # Final deterministic shuffle for stable row ordering across runs.
+    df = df.sample(frac=1.0, random_state=random_state).reset_index(drop=True)
     return df
 
 def main():
     print("Generating function names dataset...")
-    df = generate_dataset(num_records=720)
+    df = generate_dataset(num_records=720, random_state=42)
     print(f"Generated {len(df)} records.")
     
     # Save the dataframe

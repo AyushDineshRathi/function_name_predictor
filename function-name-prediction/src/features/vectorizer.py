@@ -12,8 +12,16 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 EMBEDDING_MATRIX_PATH = PROJECT_ROOT / "models" / "embedding_matrix.npy"
 WORD_INDEX_PATH = PROJECT_ROOT / "models" / "word_index.pkl"
 
-PAD_TOKEN = "<PAD>"
-UNK_TOKEN = "<UNK>"
+def get_vectorizer():
+    global _vectorizer
+    if _vectorizer is None:
+        _vectorizer = TfidfVectorizer(
+            ngram_range=(1, 3),
+            max_features=10000,
+            min_df=2,
+            stop_words='english',
+        )
+    return _vectorizer
 
 
 def normalize_text(text: str) -> str:

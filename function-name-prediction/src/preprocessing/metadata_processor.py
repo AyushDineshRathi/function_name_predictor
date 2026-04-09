@@ -1,90 +1,10 @@
-import argparse
-import re
+import pandas as pd
 from pathlib import Path
+from src.preprocessing.text_normalizer import build_structured_metadata
 
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-REQUIRED_COLUMNS = [
-    "description",
-    "parameters",
-    "return_type",
-    "library",
-    "keywords",
-    "function_name",
-]
-
-
-def _normalize_spaces(text: str) -> str:
-    """Collapse repeated whitespace into a single space."""
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def _to_text(value) -> str:
-    """Convert values safely to text, replacing null-like values with an empty string."""
-    if pd.isna(value):
-        return ""
-    return str(value)
-
-
-def clean_text(value) -> str:
-    """
-    Generic cleaner:
-    - lowercase
-    - remove punctuation/special chars
-    - normalize extra spaces
-    """
-    text = _to_text(value).lower()
-    text = re.sub(r"[^a-z0-9\s]", " ", text)
-    return _normalize_spaces(text)
-
-
-def clean_parameters(value) -> str:
-    """
-    Parameters cleaner:
-    - lowercase
-    - remove type syntax symbols such as < > ,
-    - remove remaining punctuation
-    - normalize spaces
-    """
-    text = _to_text(value).lower()
-    text = re.sub(r"[<>,]", " ", text)
-    text = re.sub(r"[^a-z0-9\s]", " ", text)
-    return _normalize_spaces(text)
-
-
-def clean_keywords(value) -> str:
-    """
-    Keywords cleaner:
-    - split by comma
-    - clean each keyword token
-    - join with spaces
-    """
-    text = _to_text(value).lower()
-    if not text:
-        return ""
-
-    parts = text.split(",")
-    cleaned_parts = []
-    for part in parts:
-        token = re.sub(r"[^a-z0-9\s]", " ", part)
-        token = _normalize_spaces(token)
-        if token:
-            cleaned_parts.append(token)
-    return " ".join(cleaned_parts)
-
-
-def build_input_text(description: str, parameters: str, return_type: str, library: str, keywords: str) -> str:
-    """Build model input in the exact tagged format requested."""
-    return (
-        f"[DESC] {description} "
-        f"[PARAMS] {parameters} "
-        f"[RET] {return_type} "
-        f"[LIB] {library} "
-        f"[KEY] {keywords}"
-    )
-
 
 def prepare_dataset(path: str) -> pd.DataFrame:
     """
@@ -95,30 +15,23 @@ def prepare_dataset(path: str) -> pd.DataFrame:
     input_path = Path(path)
     print(f"Loading raw dataset from {input_path}...")
     df = pd.read_csv(input_path)
-
-    missing = [col for col in REQUIRED_COLUMNS if col not in df.columns]
-    if missing:
-        raise ValueError(f"Missing required columns: {missing}")
-
-    print("Cleaning and formatting metadata...")
-    description = df["description"].apply(clean_text)
-    parameters = df["parameters"].apply(clean_parameters)
-    return_type = df["return_type"].apply(clean_text)
-    library = df["library"].apply(clean_text)
-    keywords = df["keywords"].apply(clean_keywords)
-
-    input_text = [
-        build_input_text(d, p, r, l, k)
-        for d, p, r, l, k in zip(description, parameters, return_type, library, keywords)
-    ]
-
-    result_df = pd.DataFrame(
-        {
-            "input_text": input_text,
-            "function_name": df["function_name"].fillna("").astype(str),
-        }
-    )
-
+    
+    print("Combining metadata...")
+    # Combine metadata into a single structured feature using format:
+    # "desc:add two integers | params:int int | return:int | keywords:add sum"
+    
+    def combine_row(row):
+        return build_structured_metadata(
+            description=row.get("description", ""),
+            parameters=row.get("parameters", ""),
+            return_type=row.get("return_type", ""),
+            keywords=row.get("keywords", ""),
+        )
+        
+    df['combined_metadata'] = df.apply(combine_row, axis=1)
+    
+    # Keep only the necessary columns
+    result_df = df[['combined_metadata', 'function_name']]
     print("Dataset preparation complete.")
     return result_df
 
